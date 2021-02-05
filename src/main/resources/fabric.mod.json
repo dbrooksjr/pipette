@@ -1,0 +1,39 @@
+{
+    "schemaVersion": 1,
+    "id": "mint",
+    "version": "${version}",
+
+    "name": "Mint",
+    "description": "Mint adds a set of simple changes to Minecraft that allow for significant improvements to automation and QOL, while maintaining the vanilla Minecraft feel we all hold so dear.",
+    "authors": [
+        "octalide"
+    ],
+    "contact": {
+        "homepage": "https://github.com/octalide",
+        "sources": "https://github.com/octalide/mint"
+    },
+
+    "license": "CC0-1.0",
+    "icon": "assets/mint/icon.png",
+
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "dev.octalide.mint.Mint"
+        ],
+        "client": [
+
+        ]
+    },
+    "mixins": [
+    ],
+
+    "depends": {
+        "fabricloader": ">=0.7.4",
+        "fabric": "*",
+        "minecraft": "1.16.x"
+    },
+    "suggests": {
+        "another-mod": "*"
+    }
+}
