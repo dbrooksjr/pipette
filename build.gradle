@@ -13,11 +13,6 @@ group = project.maven_group
 
 def gameVersion = project.minecraft_version
 
-Properties local = new Properties()
-local.load(project.rootProject.file('local.properties').newDataInputStream())
-def modrinth_token = local.getProperty('modrinth_token')
-def modrinth_id = local.getProperty('modrinth_id')
-
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${gameVersion}"
@@ -86,6 +81,12 @@ publishing {
 	}
 }
 
+/*
+Properties local = new Properties()
+local.load(project.rootProject.file('local.properties').newDataInputStream())
+def modrinth_token = local.getProperty('modrinth_token')
+def modrinth_id = local.getProperty('modrinth_id')
+
 import com.modrinth.minotaur.TaskModrinthUpload
 
 task publishModrinth (type: TaskModrinthUpload) {
@@ -96,3 +97,4 @@ task publishModrinth (type: TaskModrinthUpload) {
     addGameVersion("${gameVersion}") // Any minecraft version.
     addLoader('fabric') // Can be fabric or forge. Modrinth will support liteloader and rift at a later date.
 }
+*/
