@@ -1,9 +1,11 @@
+![build](https://github.com/octalide/mint/workflows/build/badge.svg?branch=master)
+
 # Mint
 
 Mint is a mod for Minecraft that adds a few [Min]or [T]weaks.
 
 The goal of mint is to improve QOL and automation capabilities while maintaining the vanilla minecraft "feel" we all hold so dear. This is achieved by keeping things wrapped into existing core gameplay mechanics.
-For example, most of the crafting recipes for new blocks are composed of vanilla items (no endless "item upgrade" chains found in larger mods) and ALL of the recipes have minimal levels of crafting complexity.
+For example, most of the crafting recipes for new blocks are composed of vanilla items (no endless "item upgrade" chains found in larger mods) and ALL recipes have minimal levels of crafting complexity.
 This means you won't be crafting item A for item B for item C for item D for item... you get it.
 
 Additions
@@ -88,7 +90,7 @@ The Telescopic Piston also has a sticky variant.
 The Mining Drill is exactly what it sounds like. The Mining Drill is a block that, when placed and powered with a
 redstone signal, will extend in the direction it's facing until it encounters a block, which it will break and collect.
 
-Items mined by the drill can be extracted from it's single tile inventory with a hopper or pipe.
+Items mined by the drill can be extracted from its single tile inventory with a hopper or pipe.
 
 The Mining Drill sounds like an OP item, and it definitely can be, however, creating many of these drills and linking
 them up is NOT a cheap process and does require quite a bit of planning and redstone work.
@@ -96,6 +98,6 @@ them up is NOT a cheap process and does require quite a bit of planning and reds
 Keeping these balanced required they have proper limitations. The Mining Drill:
 
 - cannot extend horizontally past 64 blocks (there is no vertical limit!)
-- has a single-tile inventory space (same as the pipe it uses in it's recipe)
+- has a single-tile inventory space (same as the pipe it uses in its recipe)
 - does NOT collect extra loot from ore (some mods allow this)
 - does NOT collect mining XP
