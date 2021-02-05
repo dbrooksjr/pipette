@@ -1,4 +1,6 @@
 ![build](https://github.com/octalide/mint/workflows/build/badge.svg?branch=master)
+[![GitHub license](https://img.shields.io/github/license/octalide/mint)](https://github.com/octalide/mint/blob/master/LICENSE)
+
 
 # Mint
 
