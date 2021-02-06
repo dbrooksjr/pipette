@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "mint:items/telescopic_beam"
+        "layer0": "mint:item/telescopic_beam"
     }
 }

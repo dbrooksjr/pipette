@@ -10,6 +10,19 @@ The goal of mint is to improve QOL and automation capabilities while maintaining
 For example, most of the crafting recipes for new blocks are composed of vanilla items (no endless "item upgrade" chains found in larger mods) and ALL recipes have minimal levels of crafting complexity.
 This means you won't be crafting item A for item B for item C for item D for item... you get it.
 
+> Mint is currently IN DEVELOPMENT. Not all features may be working or implemented.
+
+Currently implemented:
+
+ - [ ] Pipes
+    - [ ] Pipe
+    - [ ] Filter Pipe
+    - [ ] Ender Pipe
+ - [ ] Placer
+ - [ ] Breaker
+ - [ ] Telescopic Piston
+ - [ ] Mining Drill
+
 Additions
 ---
 

@@ -1,0 +1,317 @@
+{
+    "multipart": [
+        {
+            "when": {
+                "facing": "north",
+                "pull": false,
+                "powered": false
+            },
+            "apply": {
+                "model": "mint:block/pipe"
+            }
+        },
+        {
+            "when": {
+                "facing": "east",
+                "pull": false,
+                "powered": false
+            },
+            "apply": {
+                "model": "mint:block/pipe",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "facing": "south",
+                "pull": false,
+                "powered": false
+            },
+            "apply": {
+                "model": "mint:block/pipe",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "facing": "west",
+                "pull": false,
+                "powered": false
+            },
+            "apply": {
+                "model": "mint:block/pipe",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "facing": "down",
+                "pull": false,
+                "powered": false
+            },
+            "apply": {
+                "model": "mint:block/pipe",
+                "x": 90
+            }
+        },
+        {
+            "when": {
+                "facing": "up",
+                "pull": false,
+                "powered": false
+            },
+            "apply": {
+                "model": "mint:block/pipe",
+                "x": -90
+            }
+        },
+        {
+            "when": {
+                "facing": "north",
+                "pull": false,
+                "powered": true
+            },
+            "apply": {
+                "model": "mint:block/pipe"
+            }
+        },
+        {
+            "when": {
+                "facing": "east",
+                "pull": false,
+                "powered": true
+            },
+            "apply": {
+                "model": "mint:block/pipe",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "facing": "south",
+                "pull": false,
+                "powered": true
+            },
+            "apply": {
+                "model": "mint:block/pipe",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "facing": "west",
+                "pull": false,
+                "powered": true
+            },
+            "apply": {
+                "model": "mint:block/pipe",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "facing": "down",
+                "pull": false,
+                "powered": true
+            },
+            "apply": {
+                "model": "mint:block/pipe",
+                "x": 90
+            }
+        },
+        {
+            "when": {
+                "facing": "up",
+                "pull": false,
+                "powered": true
+            },
+            "apply": {
+                "model": "mint:block/pipe",
+                "x": -90
+            }
+        },
+        {
+            "when": {
+                "facing": "north",
+                "pull": true,
+                "powered": false
+            },
+            "apply": {
+                "model": "mint:block/pipe_pull"
+            }
+        },
+        {
+            "when": {
+                "facing": "east",
+                "pull": true,
+                "powered": false
+            },
+            "apply": {
+                "model": "mint:block/pipe_pull",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "facing": "south",
+                "pull": true,
+                "powered": false
+            },
+            "apply": {
+                "model": "mint:block/pipe_pull",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "facing": "west",
+                "pull": true,
+                "powered": false
+            },
+            "apply": {
+                "model": "mint:block/pipe_pull",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "facing": "down",
+                "pull": true,
+                "powered": false
+            },
+            "apply": {
+                "model": "mint:block/pipe_pull",
+                "x": 90
+            }
+        },
+        {
+            "when": {
+                "facing": "up",
+                "pull": true,
+                "powered": false
+            },
+            "apply": {
+                "model": "mint:block/pipe_pull",
+                "x": -90
+            }
+        },
+        {
+            "when": {
+                "facing": "north",
+                "pull": true,
+                "powered": true
+            },
+            "apply": {
+                "model": "mint:block/pipe_pull"
+            }
+        },
+        {
+            "when": {
+                "facing": "east",
+                "pull": true,
+                "powered": true
+            },
+            "apply": {
+                "model": "mint:block/pipe_pull",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "facing": "south",
+                "pull": true,
+                "powered": true
+            },
+            "apply": {
+                "model": "mint:block/pipe_pull",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "facing": "west",
+                "pull": true,
+                "powered": true
+            },
+            "apply": {
+                "model": "mint:block/pipe_pull",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "facing": "down",
+                "pull": true,
+                "powered": true
+            },
+            "apply": {
+                "model": "mint:block/pipe_pull",
+                "x": 90
+            }
+        },
+        {
+            "when": {
+                "facing": "up",
+                "pull": true,
+                "powered": true
+            },
+            "apply": {
+                "model": "mint:block/pipe_pull",
+                "x": -90
+            }
+        },
+        {
+            "when": {
+                "north": "true"
+            },
+            "apply": {
+                "model": "mint:block/pipe_extension"
+            }
+        },
+        {
+            "when": {
+                "east": "true"
+            },
+            "apply": {
+                "model": "mint:block/pipe_extension",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "south": "true"
+            },
+            "apply": {
+                "model": "mint:block/pipe_extension",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "west": "true"
+            },
+            "apply": {
+                "model": "mint:block/pipe_extension",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "up": "true"
+            },
+            "apply": {
+                "model": "mint:block/pipe_extension",
+                "x": -90
+            }
+        },
+        {
+            "when": {
+                "down": "true"
+            },
+            "apply": {
+                "model": "mint:block/pipe_extension",
+                "x": 90
+            }
+        }
+    ]
+}

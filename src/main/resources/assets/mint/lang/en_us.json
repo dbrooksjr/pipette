@@ -1,3 +1,8 @@
 {
-    "item.mint.telescopic_beam": "Telescopic Beam"
+    "itemGroup.mint.mint_tab": "Mint",
+
+    "item.mint.telescopic_beam": "Telescopic Beam",
+    "item.mint.pipe": "Pipe",
+
+    "block.mint.pipe": "Pipe"
 }

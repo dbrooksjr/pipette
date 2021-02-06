@@ -22,7 +22,7 @@
             "dev.octalide.mint.Mint"
         ],
         "client": [
-
+            "dev.octalide.mint.MintClient"
         ]
     },
     "mixins": [
