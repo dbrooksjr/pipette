@@ -2,19 +2,17 @@ package dev.octalide.mint.blockentities;
 
 import dev.octalide.mint.blocks.MBlocks;
 import dev.octalide.mint.blocks.PipeBase;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.Direction;
 
-public class PipeExtractorEntity extends PipeEntityBase {
+public class PipeSplitterEntity extends PipeEntityBase {
     private int currentOutput = 0;
 
-    public PipeExtractorEntity() {
+    public PipeSplitterEntity() {
         super(MBlocks.PIPE_EXTRACTOR_ENTITY);
     }
 
@@ -79,44 +77,6 @@ public class PipeExtractorEntity extends PipeEntityBase {
         */
 
         return result;
-    }
-
-    protected void attemptInput() {
-        // check for input inventory
-        if (world == null) return;
-
-        Direction inputDirection = getCachedState().get(PipeBase.Props.facing);
-        Inventory inputInventory = HopperBlockEntity.getInventoryAt(world, pos.offset(inputDirection));
-
-        if (inputInventory == null) return;
-
-        // don't pull from blocks that push -- they're already pushing
-        Block inputBlock = world.getBlockState(pos.offset(inputDirection)).getBlock();
-        if (inputBlock.is(Blocks.HOPPER)) return;
-        if (inputBlock.is(MBlocks.PIPE)) return;
-        if (inputBlock.is(MBlocks.PIPE_EXTRACTOR)) return;
-        if (inputBlock.is(MBlocks.PIPE_FILTER)) return;
-
-        // copy the stack
-        ItemStack stackCopy = getStack(0).copy();
-
-        // transfer to the output block's inventory
-        ItemStack res = HopperBlockEntity.transfer(inputInventory, this, inputInventory.removeStack(1, 1), inputDirection);
-
-        // mark as dirty
-        if (res.isEmpty()) {
-            inputInventory.markDirty();
-        } else {
-            // put the stack back
-            this.setStack(0, stackCopy);
-        }
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-
-        attemptInput();
     }
 
     // Serialize the BlockEntity

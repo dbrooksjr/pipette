@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " l ",
+        "i i",
+        " i "
+    ],
+    "key": {
+        "l": {
+            "item": "minecraft:lapis_lazuli"
+        },
+        "i": {
+            "item": "minecraft:iron_ingot"
+        }
+    },
+    "result": {
+        "item": "mint:pipe_splitter",
+        "count": 4
+    }
+}
