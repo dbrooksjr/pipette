@@ -1,9 +1,8 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        " i ",
-        " i ",
-        "iii"
+        "i",
+        "i"
     ],
     "key": {
         "i": {
@@ -11,7 +10,7 @@
         }
     },
     "result": {
-        "item": "mint:telescopic_beam",
+        "item": "mint:pipe_wrench",
         "count": 1
     }
 }

@@ -6,7 +6,7 @@
                 "powered": false
             },
             "apply": {
-                "model": "mint:block/pipe_filter"
+                "model": "mint:block/pipe_extractor"
             }
         },
         {
@@ -15,7 +15,7 @@
                 "powered": false
             },
             "apply": {
-                "model": "mint:block/pipe_filter",
+                "model": "mint:block/pipe_extractor",
                 "y": 90
             }
         },
@@ -25,7 +25,7 @@
                 "powered": false
             },
             "apply": {
-                "model": "mint:block/pipe_filter",
+                "model": "mint:block/pipe_extractor",
                 "y": 180
             }
         },
@@ -35,7 +35,7 @@
                 "powered": false
             },
             "apply": {
-                "model": "mint:block/pipe_filter",
+                "model": "mint:block/pipe_extractor",
                 "y": 270
             }
         },
@@ -45,7 +45,7 @@
                 "powered": false
             },
             "apply": {
-                "model": "mint:block/pipe_filter",
+                "model": "mint:block/pipe_extractor",
                 "x": 90
             }
         },
@@ -55,7 +55,7 @@
                 "powered": false
             },
             "apply": {
-                "model": "mint:block/pipe_filter",
+                "model": "mint:block/pipe_extractor",
                 "x": -90
             }
         },
@@ -65,7 +65,7 @@
                 "powered": true
             },
             "apply": {
-                "model": "mint:block/pipe_filter"
+                "model": "mint:block/pipe_extractor"
             }
         },
         {
@@ -74,7 +74,7 @@
                 "powered": true
             },
             "apply": {
-                "model": "mint:block/pipe_filter",
+                "model": "mint:block/pipe_extractor",
                 "y": 90
             }
         },
@@ -84,7 +84,7 @@
                 "powered": true
             },
             "apply": {
-                "model": "mint:block/pipe_filter",
+                "model": "mint:block/pipe_extractor",
                 "y": 180
             }
         },
@@ -94,7 +94,7 @@
                 "powered": true
             },
             "apply": {
-                "model": "mint:block/pipe_filter",
+                "model": "mint:block/pipe_extractor",
                 "y": 270
             }
         },
@@ -104,7 +104,7 @@
                 "powered": true
             },
             "apply": {
-                "model": "mint:block/pipe_filter",
+                "model": "mint:block/pipe_extractor",
                 "x": 90
             }
         },
@@ -114,7 +114,7 @@
                 "powered": true
             },
             "apply": {
-                "model": "mint:block/pipe_filter",
+                "model": "mint:block/pipe_extractor",
                 "x": -90
             }
         },

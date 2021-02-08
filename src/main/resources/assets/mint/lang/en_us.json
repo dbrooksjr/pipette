@@ -2,7 +2,13 @@
     "itemGroup.mint.mint_tab": "Mint",
 
     "item.mint.telescopic_beam": "Telescopic Beam",
-    "item.mint.pipe": "Pipe",
+    "item.mint.pipe_wrench": "Pipe Wrench",
 
-    "block.mint.pipe": "Pipe"
+    "item.mint.pipe": "Pipe",
+    "item.mint.pipe_extractor": "Extractor Pipe",
+    "item.mint.pipe_filter": "Filtered Extractor Pipe",
+
+    "block.mint.pipe": "Pipe",
+    "block.mint.pipe_extractor": "Extractor Pipe",
+    "block.mint.pipe_filter": "Filtered Extractor Pipe"
 }

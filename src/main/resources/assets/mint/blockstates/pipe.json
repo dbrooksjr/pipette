@@ -3,7 +3,6 @@
         {
             "when": {
                 "facing": "north",
-                "pull": false,
                 "powered": false
             },
             "apply": {
@@ -13,7 +12,6 @@
         {
             "when": {
                 "facing": "east",
-                "pull": false,
                 "powered": false
             },
             "apply": {
@@ -24,7 +22,6 @@
         {
             "when": {
                 "facing": "south",
-                "pull": false,
                 "powered": false
             },
             "apply": {
@@ -35,7 +32,6 @@
         {
             "when": {
                 "facing": "west",
-                "pull": false,
                 "powered": false
             },
             "apply": {
@@ -46,7 +42,6 @@
         {
             "when": {
                 "facing": "down",
-                "pull": false,
                 "powered": false
             },
             "apply": {
@@ -57,7 +52,6 @@
         {
             "when": {
                 "facing": "up",
-                "pull": false,
                 "powered": false
             },
             "apply": {
@@ -68,7 +62,6 @@
         {
             "when": {
                 "facing": "north",
-                "pull": false,
                 "powered": true
             },
             "apply": {
@@ -78,7 +71,6 @@
         {
             "when": {
                 "facing": "east",
-                "pull": false,
                 "powered": true
             },
             "apply": {
@@ -89,7 +81,6 @@
         {
             "when": {
                 "facing": "south",
-                "pull": false,
                 "powered": true
             },
             "apply": {
@@ -100,7 +91,6 @@
         {
             "when": {
                 "facing": "west",
-                "pull": false,
                 "powered": true
             },
             "apply": {
@@ -111,7 +101,6 @@
         {
             "when": {
                 "facing": "down",
-                "pull": false,
                 "powered": true
             },
             "apply": {
@@ -122,141 +111,10 @@
         {
             "when": {
                 "facing": "up",
-                "pull": false,
                 "powered": true
             },
             "apply": {
                 "model": "mint:block/pipe",
-                "x": -90
-            }
-        },
-        {
-            "when": {
-                "facing": "north",
-                "pull": true,
-                "powered": false
-            },
-            "apply": {
-                "model": "mint:block/pipe_pull"
-            }
-        },
-        {
-            "when": {
-                "facing": "east",
-                "pull": true,
-                "powered": false
-            },
-            "apply": {
-                "model": "mint:block/pipe_pull",
-                "y": 90
-            }
-        },
-        {
-            "when": {
-                "facing": "south",
-                "pull": true,
-                "powered": false
-            },
-            "apply": {
-                "model": "mint:block/pipe_pull",
-                "y": 180
-            }
-        },
-        {
-            "when": {
-                "facing": "west",
-                "pull": true,
-                "powered": false
-            },
-            "apply": {
-                "model": "mint:block/pipe_pull",
-                "y": 270
-            }
-        },
-        {
-            "when": {
-                "facing": "down",
-                "pull": true,
-                "powered": false
-            },
-            "apply": {
-                "model": "mint:block/pipe_pull",
-                "x": 90
-            }
-        },
-        {
-            "when": {
-                "facing": "up",
-                "pull": true,
-                "powered": false
-            },
-            "apply": {
-                "model": "mint:block/pipe_pull",
-                "x": -90
-            }
-        },
-        {
-            "when": {
-                "facing": "north",
-                "pull": true,
-                "powered": true
-            },
-            "apply": {
-                "model": "mint:block/pipe_pull"
-            }
-        },
-        {
-            "when": {
-                "facing": "east",
-                "pull": true,
-                "powered": true
-            },
-            "apply": {
-                "model": "mint:block/pipe_pull",
-                "y": 90
-            }
-        },
-        {
-            "when": {
-                "facing": "south",
-                "pull": true,
-                "powered": true
-            },
-            "apply": {
-                "model": "mint:block/pipe_pull",
-                "y": 180
-            }
-        },
-        {
-            "when": {
-                "facing": "west",
-                "pull": true,
-                "powered": true
-            },
-            "apply": {
-                "model": "mint:block/pipe_pull",
-                "y": 270
-            }
-        },
-        {
-            "when": {
-                "facing": "down",
-                "pull": true,
-                "powered": true
-            },
-            "apply": {
-                "model": "mint:block/pipe_pull",
-                "x": 90
-            }
-        },
-        {
-            "when": {
-                "facing": "up",
-                "pull": true,
-                "powered": true
-            },
-            "apply": {
-                "model": "mint:block/pipe_pull",
                 "x": -90
             }
         },

@@ -1,17 +1,20 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        " i ",
-        " i ",
-        "iii"
+        " g ",
+        "i i",
+        " i "
     ],
     "key": {
+        "g": {
+            "item": "minecraft:gold_ingot"
+        },
         "i": {
             "item": "minecraft:iron_ingot"
         }
     },
     "result": {
-        "item": "mint:telescopic_beam",
-        "count": 1
+        "item": "mint:pipe_filter",
+        "count": 4
     }
 }

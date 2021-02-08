@@ -1,7 +1,8 @@
 package dev.octalide.mint.blocks;
 
 import dev.octalide.mint.Mint;
-import dev.octalide.mint.blockentities.PipeEntity;
+import dev.octalide.mint.blockentities.PipeExtractorEntity;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
@@ -13,8 +14,8 @@ import net.minecraft.world.BlockView;
 
 import java.util.Arrays;
 
-public class Pipe extends PipeBase {
-    public static final String NAME = "pipe";
+public class PipeExtractor extends PipeBase {
+    public static final String NAME = "pipe_extractor";
     public static final Identifier ID = new Identifier(Mint.MOD_ID, NAME);
 
     @Override
@@ -27,12 +28,22 @@ public class Pipe extends PipeBase {
             Properties.HOPPER_FACING
         };
 
-        if (other.getBlock() == Blocks.HOPPER) {
-            can = Arrays.stream(props).anyMatch(directionProperty ->
-                other.contains(directionProperty) && other.get(directionProperty) == direction.getOpposite());
+        Block[] linkable = {
+            Blocks.CHEST,
+            Blocks.FURNACE,
+            Blocks.DISPENSER,
+            Blocks.DROPPER,
+            Blocks.TRAPPED_CHEST,
+            Blocks.BARREL,
+            Blocks.HOPPER,
+            Blocks.SHULKER_BOX,
+        };
+
+        if (Arrays.stream(linkable).anyMatch(block -> other.getBlock() == block)) {
+            can = true;
 
         } else if (other.getBlock() == MBlocks.PIPE) {
-            can = other.get(Properties.FACING) == direction.getOpposite();
+            can = true;
 
         } else if (other.getBlock() == MBlocks.PIPE_EXTRACTOR) {
             can = true;
@@ -46,6 +57,6 @@ public class Pipe extends PipeBase {
 
     @Override
     public BlockEntity createBlockEntity(BlockView blockView) {
-        return new PipeEntity();
+        return new PipeExtractorEntity();
     }
 }
