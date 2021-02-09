@@ -22,7 +22,7 @@ Currently implemented:
     - [x] Splitter Pipe
     - [ ] Ender Pipe
 - [ ] Placer
-- [ ] Breaker
+- [x] Breaker
 - [ ] Telescopic Piston
 - [ ] Mining Drill
 
