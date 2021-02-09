@@ -20,7 +20,7 @@ public abstract class PipeExtractorEntityBase extends PipeEntityBase {
         super(type);
     }
 
-    protected boolean attemptInput() {
+	protected boolean attemptInput() {
         if (world == null || world.isClient()) return false;
         if (!this.isEmpty()) return false;
         if (getCachedState().get(PipeBase.Props.powered)) return false;

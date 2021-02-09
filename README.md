@@ -20,8 +20,8 @@ Currently implemented:
     - [x] Extractor Pipe
     - [x] Filtered Extractor Pipe
     - [x] Splitter Pipe
-    - [ ] Ender Pipe
-- [ ] Placer
+    - [ ] ~~Ender Pipe~~ (Decided not to implement)
+- [ ] ~~Placer~~ (Decided not to implement)
 - [x] Destroyer
 - [ ] Telescopic Piston
 - [ ] Mining Drill
@@ -118,5 +118,3 @@ Keeping these balanced required they have proper limitations. The Mining Drill:
 
 - cannot extend horizontally past 64 blocks (there is no vertical limit!)
 - has a single-tile inventory space (same as the pipe it uses in its recipe)
-- does NOT collect extra loot from ore (some mods allow this)
-- does NOT collect mining XP

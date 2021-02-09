@@ -1,18 +1,16 @@
 package dev.octalide.mint.blocks;
 
+import java.util.Arrays;
+
 import dev.octalide.mint.Mint;
 import dev.octalide.mint.blockentities.PipeSplitterEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
-
-import java.util.Arrays;
 
 public class PipeSplitter extends PipeBase {
     public static final String NAME = "pipe_splitter";
@@ -21,12 +19,6 @@ public class PipeSplitter extends PipeBase {
     @Override
     protected boolean canExtend(BlockState state, BlockState other, Direction direction) {
         boolean can = false;
-
-        DirectionProperty[] props = {
-            Properties.FACING,
-            Properties.HORIZONTAL_FACING,
-            Properties.HOPPER_FACING
-        };
 
         Block[] linkable = {
             Blocks.CHEST,

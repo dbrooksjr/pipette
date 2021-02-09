@@ -31,8 +31,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 
-@SuppressWarnings("deprecation")
-public abstract class PipeBase extends BlockWithEntity implements BlockEntityProvider {
+public abstract class PipeBase extends BlockWithEntity {
     public PipeBase() {
         super(FabricBlockSettings
             .of(Material.METAL)

@@ -20,8 +20,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings("deprecation")
-public class Destroyer extends BlockWithEntity implements BlockEntityProvider {
+public class Destroyer extends BlockWithEntity {
     public static final String NAME = "destroyer";
     public static final Identifier ID = new Identifier(Mint.MOD_ID, NAME);
 
