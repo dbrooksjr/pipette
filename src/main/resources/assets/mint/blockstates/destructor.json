@@ -1,0 +1,26 @@
+{
+    "variants": {
+        "facing=down": {
+            "model": "mint:block/destructor_vertical",
+            "x": 180
+        },
+        "facing=east": {
+            "model": "mint:block/destructor",
+            "y": 90
+        },
+        "facing=north": {
+            "model": "mint:block/destructor"
+        },
+        "facing=south": {
+            "model": "mint:block/destructor",
+            "y": 180
+        },
+        "facing=up": {
+            "model": "mint:block/destructor_vertical"
+        },
+        "facing=west": {
+            "model": "mint:block/destructor",
+            "y": 270
+        }
+    }
+}

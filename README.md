@@ -39,13 +39,6 @@ The Telescopic Beam is an item used to craft a few of the blocks in mint, namely
 
 # Blocks
 
-## Loadstone
-
-This is a single block that, when placed in a chunk, will keep the chunk loaded. This block DOES work on servers, but
-CAN be disabled through configuration.
-
-> While this block honestly doesn't have a very "vanilla" feel, I felt it was appropriate to include in this mod as the uses for an item like this are astounding, and traditional redstone "chunk loaders" *can* be built in vanilla minecraft very inexpensively.
-
 ## Pipes
 
 ### Pipe
@@ -79,7 +72,6 @@ similar to an Ender Chest.
 
 Ender Pipes:
 
-- have an inventory space of 5 tiles
 - share a single inventory (similar to an Ender Chest)
 - by default share a player-restricted inventory (again, like an Ender Chest), UNLESS they are renamed.
     - Ender Pipes with the same name will share the same inventory (Ender Pipes named "My Cobblestone" will have a
@@ -91,7 +83,6 @@ Ender Pipes:
 > The Ender Pipe is a block I personally debated adding. I decided I would allow it on the condition that it is EXPENSIVE and LIMITING.
 > The final decision to add this item came from the realization that *Ender Chests* already exist in vanilla minecraft.
 > I decided to implement the Ender Pipe with a similar design-principal to that of the Ender Chest.
-
 
 ---
 

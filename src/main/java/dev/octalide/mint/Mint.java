@@ -28,13 +28,14 @@ public class Mint implements ModInitializer {
         new Identifier(Mint.MOD_ID, "mint_tab"))
         .icon(() -> new ItemStack(MItems.TELESCOPIC_BEAM))
         .appendItems(stacks -> {
+            stacks.add(new ItemStack(MItems.TELESCOPIC_BEAM));
             stacks.add(new ItemStack(MItems.PIPE_WRENCH));
             stacks.add(new ItemStack(MBlocks.PIPE));
             stacks.add(new ItemStack(MBlocks.PIPE_EXTRACTOR));
             stacks.add(new ItemStack(MBlocks.PIPE_FILTER));
             stacks.add(new ItemStack(MBlocks.PIPE_SPLITTER));
             stacks.add(new ItemStack(MBlocks.PIPE_DISPOSAL));
-            stacks.add(new ItemStack(MItems.TELESCOPIC_BEAM));
+            stacks.add(new ItemStack(MBlocks.DESTRUCTOR));
         })
         .build();
 

@@ -11,10 +11,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.stream.IntStream;
 
 public interface PipeInventoryImpl extends SidedInventory {
-    /**
-     * Retrieves the item list of this inventory.
-     * Must return the same instance every time it's called.
-     */
     DefaultedList<ItemStack> getItems();
 
     static PipeInventoryImpl of(DefaultedList<ItemStack> items) {

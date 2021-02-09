@@ -189,8 +189,6 @@ public abstract class PipeBase extends BlockWithEntity implements BlockEntityPro
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext context) {
-        // decide which VoxelShape combination to supply
-
         return Shapes.fromState(state);
     }
 

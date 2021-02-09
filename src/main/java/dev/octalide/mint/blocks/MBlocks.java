@@ -14,12 +14,14 @@ public class MBlocks {
     public static PipeFilter PIPE_FILTER;
     public static PipeSplitter PIPE_SPLITTER;
     public static PipeDisposal PIPE_DISPOSAL;
+    public static Destructor DESTRUCTOR;
 
     public static BlockEntityType<PipeEntity> PIPE_ENTITY;
     public static BlockEntityType<PipeExtractorEntity> PIPE_EXTRACTOR_ENTITY;
     public static BlockEntityType<PipeFilterEntity> PIPE_FILTER_ENTITY;
     public static BlockEntityType<PipeSplitterEntity> PIPE_SPLITTER_ENTITY;
     public static BlockEntityType<PipeDisposalEntity> PIPE_DISPOSAL_ENTITY;
+    public static BlockEntityType<DestructorEntity> DESTRUCTOR_ENTITY;
 
     public static void register() {
         // blocks
@@ -28,6 +30,7 @@ public class MBlocks {
         PIPE_FILTER = Registry.register(Registry.BLOCK, PipeFilter.ID, PIPE_FILTER);
         PIPE_SPLITTER = Registry.register(Registry.BLOCK, PipeSplitter.ID, PIPE_SPLITTER);
         PIPE_DISPOSAL = Registry.register(Registry.BLOCK, PipeDisposal.ID, PIPE_DISPOSAL);
+        DESTRUCTOR = Registry.register(Registry.BLOCK, Destructor.ID, DESTRUCTOR);
 
         // block entities
         PIPE_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, Pipe.ID, BlockEntityType.Builder.create(PipeEntity::new, MBlocks.PIPE).build(null));
@@ -35,6 +38,7 @@ public class MBlocks {
         PIPE_FILTER_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, PipeFilter.ID, BlockEntityType.Builder.create(PipeFilterEntity::new, MBlocks.PIPE_FILTER).build(null));
         PIPE_SPLITTER_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, PipeSplitter.ID, BlockEntityType.Builder.create(PipeSplitterEntity::new, MBlocks.PIPE_SPLITTER).build(null));
         PIPE_DISPOSAL_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, PipeDisposal.ID, BlockEntityType.Builder.create(PipeDisposalEntity::new, MBlocks.PIPE_DISPOSAL).build(null));
+        DESTRUCTOR_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, Destructor.ID, BlockEntityType.Builder.create(DestructorEntity::new, MBlocks.DESTRUCTOR).build(null));
 
         // block items
         Registry.register(Registry.ITEM, Pipe.ID, new BlockItem(PIPE, new FabricItemSettings().group(ItemGroup.REDSTONE)));
@@ -42,6 +46,7 @@ public class MBlocks {
         Registry.register(Registry.ITEM, PipeFilter.ID, new BlockItem(PIPE_FILTER, new FabricItemSettings().group(ItemGroup.REDSTONE)));
         Registry.register(Registry.ITEM, PipeSplitter.ID, new BlockItem(PIPE_SPLITTER, new FabricItemSettings().group(ItemGroup.REDSTONE)));
         Registry.register(Registry.ITEM, PipeDisposal.ID, new BlockItem(PIPE_DISPOSAL, new FabricItemSettings().group(ItemGroup.REDSTONE)));
+        Registry.register(Registry.ITEM, Destructor.ID, new BlockItem(DESTRUCTOR, new FabricItemSettings().group(ItemGroup.REDSTONE)));
     }
 
     static {
@@ -50,5 +55,6 @@ public class MBlocks {
         PIPE_FILTER = new PipeFilter();
         PIPE_SPLITTER = new PipeSplitter();
         PIPE_DISPOSAL = new PipeDisposal();
+        DESTRUCTOR = new Destructor();
     }
 }

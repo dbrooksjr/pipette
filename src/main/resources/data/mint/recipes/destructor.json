@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "ccc",
+        "ctc",
+        "crc"
+    ],
+    "key": {
+        "c": {
+            "item": "minecraft:cobblestone"
+        },
+        "r": {
+            "item": "minecraft:redstone"
+        },
+        "t": {
+            "item": "minecraft:tnt"
+        }
+    },
+    "result": {
+        "item": "mint:destructor",
+        "count": 1
+    }
+}
