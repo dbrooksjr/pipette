@@ -18,7 +18,7 @@ public class PipeSplitterEntity extends PipeEntityBase {
 
     protected boolean attemptOutput() {
         if (world == null || world.isClient()) return false;
-        if (!this.isEmpty()) return false;
+        if (this.isEmpty()) return false;
         if (getCachedState().get(PipeBase.Props.powered)) return false;
 
         Direction facing = getCachedState().get(PipeBase.Props.facing);
@@ -71,8 +71,6 @@ public class PipeSplitterEntity extends PipeEntityBase {
             // this output is valid
             if (!invalid) return next;
         }
-
-        System.out.println("returned null");
 
         return null;
     }

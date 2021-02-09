@@ -9,12 +9,15 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.stream.IntStream;
 
 public abstract class PipeEntityBase extends BlockEntity implements PipeInventoryImpl, Tickable {
     DefaultedList<ItemStack> items = DefaultedList.ofSize(1, ItemStack.EMPTY);
@@ -67,11 +70,6 @@ public abstract class PipeEntityBase extends BlockEntity implements PipeInventor
     @Override
     public DefaultedList<ItemStack> getItems() {
         return items;
-    }
-
-    @Override
-    public int[] getAvailableSlots(Direction side) {
-        return new int[0];
     }
 
     @Override

@@ -8,6 +8,8 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.stream.IntStream;
+
 public interface PipeInventoryImpl extends SidedInventory {
     /**
      * Retrieves the item list of this inventory.
@@ -32,7 +34,15 @@ public interface PipeInventoryImpl extends SidedInventory {
     }
 
     default boolean isEmpty() {
-        return getItems().isEmpty();
+        for (int i = 0; i < size(); i++) {
+            ItemStack stack = getStack(i);
+
+            if (!stack.isEmpty()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     default ItemStack getStack(int slot) {
@@ -73,7 +83,7 @@ public interface PipeInventoryImpl extends SidedInventory {
     }
 
     default int[] getAvailableSlots(Direction side) {
-        return new int[0];
+        return IntStream.range(0, this.size()).toArray();
     }
 
     default boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
