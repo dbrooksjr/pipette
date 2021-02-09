@@ -1,7 +1,6 @@
 package dev.octalide.mint.items;
 
 import dev.octalide.mint.Mint;
-import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 

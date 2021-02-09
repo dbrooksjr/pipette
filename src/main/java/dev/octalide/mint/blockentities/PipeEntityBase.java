@@ -9,15 +9,12 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.stream.IntStream;
 
 public abstract class PipeEntityBase extends BlockEntity implements PipeInventoryImpl, Tickable {
     DefaultedList<ItemStack> items = DefaultedList.ofSize(1, ItemStack.EMPTY);
@@ -32,9 +29,8 @@ public abstract class PipeEntityBase extends BlockEntity implements PipeInventor
         if (this.isEmpty()) return false;
 
         Direction facing = getCachedState().get(Pipe.Props.facing);
-        Direction target = facing;
 
-        Inventory output = HopperBlockEntity.getInventoryAt(world, pos.offset(target));
+        Inventory output = HopperBlockEntity.getInventoryAt(world, pos.offset(facing));
         if (output == null) return false;
 
         return transfer(this, output, facing.getOpposite());

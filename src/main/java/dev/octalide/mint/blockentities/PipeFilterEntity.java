@@ -1,10 +1,8 @@
 package dev.octalide.mint.blockentities;
 
 import dev.octalide.mint.blocks.MBlocks;
-import dev.octalide.mint.blocks.PipeBase;
 import dev.octalide.mint.screens.PipeFilterGuiDescription;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
-import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;

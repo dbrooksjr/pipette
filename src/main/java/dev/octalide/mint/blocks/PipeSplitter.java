@@ -1,7 +1,6 @@
 package dev.octalide.mint.blocks;
 
 import dev.octalide.mint.Mint;
-import dev.octalide.mint.blockentities.PipeExtractorEntity;
 import dev.octalide.mint.blockentities.PipeSplitterEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

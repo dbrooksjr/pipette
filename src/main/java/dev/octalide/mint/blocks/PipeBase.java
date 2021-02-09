@@ -5,11 +5,8 @@ import dev.octalide.mint.items.MItems;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundCategory;
@@ -26,12 +23,15 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 
+@SuppressWarnings("deprecation")
 public abstract class PipeBase extends BlockWithEntity implements BlockEntityProvider {
     public PipeBase() {
         super(FabricBlockSettings
@@ -51,7 +51,7 @@ public abstract class PipeBase extends BlockWithEntity implements BlockEntityPro
         if (player.isHolding(MItems.PIPE_WRENCH)) {
             // rotate direction
             Direction facing = state.get(Props.facing);
-            Direction rotated = facing;
+            Direction rotated;
 
             if (facing != Direction.DOWN && facing != Direction.UP) rotated = facing.rotateYClockwise();
             else rotated = facing.getOpposite();
