@@ -1,13 +1,13 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        " l ",
-        "i i",
+        " i ",
+        "idi",
         " i "
     ],
     "key": {
-        "l": {
-            "item": "minecraft:lapis_lazuli"
+        "d": {
+            "item": "minecraft:dropper"
         },
         "i": {
             "item": "minecraft:iron_ingot"

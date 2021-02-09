@@ -1,13 +1,13 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        " # ",
-        "i i",
+        " i ",
+        "ici",
         " i "
     ],
     "key": {
-        "#": {
-            "item": "minecraft:redstone"
+        "c": {
+            "item": "minecraft:chest"
         },
         "i": {
             "item": "minecraft:iron_ingot"

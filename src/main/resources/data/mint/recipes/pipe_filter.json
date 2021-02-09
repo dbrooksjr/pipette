@@ -1,13 +1,13 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        " g ",
-        "i i",
+        " i ",
+        "ici",
         " i "
     ],
     "key": {
-        "g": {
-            "item": "minecraft:gold_ingot"
+        "c": {
+            "item": "minecraft:comparator"
         },
         "i": {
             "item": "minecraft:iron_ingot"

@@ -5,8 +5,12 @@ import dev.octalide.mint.items.MItems;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -64,6 +68,21 @@ public abstract class PipeBase extends BlockWithEntity implements BlockEntityPro
         return result;
     }
 
+    protected BlockState updateExtensions(BlockState state, World world, BlockPos pos) {
+        for (Entry<Direction, BooleanProperty> extension : Props.extensions.entrySet()) {
+            state = state.with(
+                extension.getValue(),
+                canExtend(state, world.getBlockState(pos.offset(extension.getKey())), extension.getKey())
+            );
+        }
+
+        return state;
+    }
+
+    protected BlockState updatePowered(BlockState state, World world, BlockPos pos) {
+        return state.with(Props.powered, world.isReceivingRedstonePower(pos));
+    }
+
     protected boolean canExtend(BlockState state, BlockState other, Direction direction) {
         boolean can = false;
 
@@ -97,35 +116,6 @@ public abstract class PipeBase extends BlockWithEntity implements BlockEntityPro
         return can;
     }
 
-    protected BlockState updateExtensions(BlockState state, World world, BlockPos pos) {
-        for (Entry<Direction, BooleanProperty> extension : Props.extensions.entrySet()) {
-            state = state.with(
-                extension.getValue(),
-                canExtend(state, world.getBlockState(pos.offset(extension.getKey())), extension.getKey())
-            );
-        }
-
-        return state;
-    }
-
-    private boolean isPowered(WorldAccess world, BlockPos pos) {
-        BlockState state = world.getBlockState(pos);
-
-        if (state.getWeakRedstonePower(world, pos.down(), Direction.DOWN) > 0) {
-            return true;
-        } else if (state.getWeakRedstonePower(world, pos.up(), Direction.UP) > 0) {
-            return true;
-        } else if (state.getWeakRedstonePower(world, pos.north(), Direction.NORTH) > 0) {
-            return true;
-        } else if (state.getWeakRedstonePower(world, pos.south(), Direction.SOUTH) > 0) {
-            return true;
-        } else if (state.getWeakRedstonePower(world, pos.west(), Direction.WEST) > 0) {
-            return true;
-        } else {
-            return state.getWeakRedstonePower(world, pos.east(), Direction.EAST) > 0;
-        }
-    }
-
     @Override
     public BlockState getPlacementState(ItemPlacementContext context) {
         BlockState state = this.getDefaultState();
@@ -145,11 +135,34 @@ public abstract class PipeBase extends BlockWithEntity implements BlockEntityPro
         return state;
     }
 
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+        state = updatePowered(state, world, pos);
+        state = updateExtensions(state, world, pos);
+
+        world.setBlockState(pos, state);
+    }
+
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState, WorldAccess world, BlockPos pos, BlockPos posFrom) {
-        return state
-            .with(Props.extensions.get(direction), canExtend(state, newState, direction))
-            .with(Props.powered, isPowered(world, pos));
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        if (state.getBlock() != newState.getBlock()) {
+            BlockEntity entity = world.getBlockEntity(pos);
+            if (entity instanceof PipeEntityBase) {
+                ItemScatterer.spawn(world, pos, ((PipeEntityBase) entity).getItems());
+                world.updateComparators(pos, this);
+            }
+        }
+
+        super.onStateReplaced(state, world, pos, newState, moved);
+    }
+
+    @Override
+    public boolean hasComparatorOutput(BlockState state) {
+        return true;
+    }
+
+    @Override
+    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+        return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
     }
 
     @Override

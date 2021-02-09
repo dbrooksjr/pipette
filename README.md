@@ -1,27 +1,30 @@
 ![build](https://github.com/octalide/mint/workflows/build/badge.svg?branch=master)
 [![GitHub license](https://img.shields.io/github/license/octalide/mint)](https://github.com/octalide/mint/blob/master/LICENSE)
 
-
 # Mint
 
 Mint is a mod for Minecraft that adds a few [Min]or [T]weaks.
 
-The goal of mint is to improve QOL and automation capabilities while maintaining the vanilla minecraft "feel" we all hold so dear. This is achieved by keeping things wrapped into existing core gameplay mechanics.
-For example, most of the crafting recipes for new blocks are composed of vanilla items (no endless "item upgrade" chains found in larger mods) and ALL recipes have minimal levels of crafting complexity.
-This means you won't be crafting item A for item B for item C for item D for item... you get it.
+The goal of mint is to improve QOL and automation capabilities while maintaining the vanilla minecraft "feel" we all
+hold so dear. This is achieved by keeping things wrapped into existing core gameplay mechanics. For example, most of the
+crafting recipes for new blocks are composed of vanilla items (no endless "item upgrade" chains found in larger mods)
+and ALL recipes have minimal levels of crafting complexity. This means you won't be crafting item A for item B for item
+C for item D for item... you get it.
 
 > Mint is currently IN DEVELOPMENT. Not all features may be working or implemented.
 
 Currently implemented:
 
- - [ ] Pipes
-    - [ ] Pipe
-    - [ ] Filter Pipe
+- [x] Pipes
+    - [x] Pipe
+    - [x] Extractor Pipe
+    - [x] Filtered Extractor Pipe
+    - [x] Splitter Pipe
     - [ ] Ender Pipe
- - [ ] Placer
- - [ ] Breaker
- - [ ] Telescopic Piston
- - [ ] Mining Drill
+- [ ] Placer
+- [ ] Breaker
+- [ ] Telescopic Piston
+- [ ] Mining Drill
 
 Additions
 ---
@@ -38,8 +41,8 @@ The Telescopic Beam is an item used to craft a few of the blocks in mint, namely
 
 ## Loadstone
 
-This is a single block that, when placed in a chunk, will keep the chunk loaded.
-This block DOES work on servers, but CAN be disabled through configuration.
+This is a single block that, when placed in a chunk, will keep the chunk loaded. This block DOES work on servers, but
+CAN be disabled through configuration.
 
 > While this block honestly doesn't have a very "vanilla" feel, I felt it was appropriate to include in this mod as the uses for an item like this are astounding, and traditional redstone "chunk loaders" *can* be built in vanilla minecraft very inexpensively.
 
@@ -52,14 +55,22 @@ A pipe is similar to a vanilla Minecraft Hopper, but it:
 - is slightly cheaper!
 - has a single-tile inventory size
 - can be placed in any orientation
-- cannot pick up items from the surrounding area (can pull from inventories)
+- cannot pick up items from the surrounding area or pull from inventories
 
 In effect, this turns the vanilla Hopper into an item *collection* utility, while Pipes can be used for item *
 transportation*.
 
-### Filter Pipe
+### Extractor Pipe
+
+An Extractor Pipe pulls from the inventory it's connected to (similar to a hopper, but not restricted to direction).
+
+### Filtered Extractor Pipe
 
 A Filter Pipe allows for whitelisting a single item type. Simple enough!
+
+### Splitter Pipe
+
+A Splitter Pipe can branch out to multiple destinations, cycling output evenly between them. No more janky hopper configurations!
 
 ### Ender Pipe
 
@@ -71,8 +82,9 @@ Ender Pipes:
 - have an inventory space of 5 tiles
 - share a single inventory (similar to an Ender Chest)
 - by default share a player-restricted inventory (again, like an Ender Chest), UNLESS they are renamed.
-    - Ender Pipes with the same name will share the same inventory (Ender Pipes named "My Cobblestone" will have a different
-      inventory than ones named "My Diamonds"). This even works on servers, but chose your names wisely as renamed Ender Pipes are NOT bound to player names!
+    - Ender Pipes with the same name will share the same inventory (Ender Pipes named "My Cobblestone" will have a
+      different inventory than ones named "My Diamonds"). This even works on servers, but chose your names wisely as
+      renamed Ender Pipes are NOT bound to player names!
 
 > P.S:
 >
@@ -85,13 +97,14 @@ Ender Pipes:
 
 ## Placer
 
-The Placer is similar to an item Dispenser from vanilla Minecraft.
-The only difference is when a block is put in a Placer, and it's activated with a redstone signal, the Placer will *place* that block in the direction it's facing.
+The Placer is similar to an item Dispenser from vanilla Minecraft. The only difference is when a block is put in a
+Placer, and it's activated with a redstone signal, the Placer will *place* that block in the direction it's facing.
 
 ## Breaker
 
-A Breaker is the opposite of a Placer. When given a redstone signal, it will *break* the block in the direction it's facing.
-Note that the Breaker does NOT have an internal inventory and WILL leave the resulting item drop where it spawns.
+A Breaker is the opposite of a Placer. When given a redstone signal, it will *break* the block in the direction it's
+facing. Note that the Breaker does NOT have an internal inventory and WILL leave the resulting item drop where it
+spawns.
 
 ## Telescopic Piston
 

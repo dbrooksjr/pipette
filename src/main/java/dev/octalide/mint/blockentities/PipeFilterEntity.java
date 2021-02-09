@@ -44,6 +44,11 @@ public class PipeFilterEntity extends PipeExtractorEntityBase implements Extende
     }
 
     @Override
+    public int size() {
+        return super.size() - 1;
+    }
+
+    @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player) {
         return new PipeFilterGuiDescription(syncId, inventory, ScreenHandlerContext.create(world, pos));
     }
