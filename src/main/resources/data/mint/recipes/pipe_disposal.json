@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " i ",
+        "ili",
+        " i "
+    ],
+    "key": {
+        "l": {
+            "item": "minecraft:lava_bucket"
+        },
+        "i": {
+            "item": "minecraft:iron_ingot"
+        }
+    },
+    "result": {
+        "item": "mint:pipe_disposal",
+        "count": 1
+    }
+}

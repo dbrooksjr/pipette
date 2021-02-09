@@ -8,9 +8,11 @@
     "item.mint.pipe_extractor": "Extractor Pipe",
     "item.mint.pipe_filter": "Filtered Extractor Pipe",
     "item.mint.pipe_splitter": "Splitter Pipe",
+    "item.mint.pipe_disposal": "Disposal Pipe",
 
     "block.mint.pipe": "Pipe",
     "block.mint.pipe_extractor": "Extractor Pipe",
     "block.mint.pipe_filter": "Filtered Extractor Pipe",
-    "block.mint.pipe_splitter": "Splitter Extractor Pipe"
+    "block.mint.pipe_splitter": "Splitter Pipe",
+    "block.mint.pipe_disposal": "Disposal Pipe"
 }

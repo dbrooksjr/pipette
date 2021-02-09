@@ -1,0 +1,7 @@
+{
+	"parent": "mint:block/pipe",
+	"textures": {
+		"0": "mint:block/pipe_disposal",
+		"particle": "mint:block/pipe_disposal"
+	}
+}

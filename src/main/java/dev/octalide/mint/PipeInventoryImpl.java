@@ -2,86 +2,85 @@ package dev.octalide.mint;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.Nullable;
 
-public interface PipeInventory extends Inventory {
+public interface PipeInventoryImpl extends SidedInventory {
+    /**
+     * Retrieves the item list of this inventory.
+     * Must return the same instance every time it's called.
+     */
     DefaultedList<ItemStack> getItems();
 
-    static PipeInventory of(DefaultedList<ItemStack> items) {
+    static PipeInventoryImpl of(DefaultedList<ItemStack> items) {
         return () -> items;
     }
 
-    static PipeInventory ofSize(int size) {
+    static PipeInventoryImpl ofSize(int size) {
         return of(DefaultedList.ofSize(size, ItemStack.EMPTY));
     }
 
-    @Override
+    default int getMaxCountPerStack() {
+        return 1;
+    }
+
     default int size() {
         return getItems().size();
     }
 
-    @Override
     default boolean isEmpty() {
-        for (int i = 0; i < size(); i++) {
-            ItemStack stack = getStack(i);
-            if (!stack.isEmpty()) {
-                return false;
-            }
-        }
-        return true;
+        return getItems().isEmpty();
     }
 
-    @Override
     default ItemStack getStack(int slot) {
         return getItems().get(slot);
     }
 
-    @Override
-    default ItemStack removeStack(int slot, int count) {
-        ItemStack result = Inventories.splitStack(getItems(), slot, count);
+    default ItemStack removeStack(int slot, int amount) {
+        ItemStack result = Inventories.splitStack(getItems(), slot, amount);
         if (!result.isEmpty()) {
             markDirty();
         }
+
         return result;
     }
 
-    @Override
     default ItemStack removeStack(int slot) {
         return Inventories.removeStack(getItems(), slot);
     }
 
-    @Override
     default void setStack(int slot, ItemStack stack) {
         getItems().set(slot, stack);
+
         if (stack.getCount() > getMaxCountPerStack()) {
             stack.setCount(getMaxCountPerStack());
         }
     }
 
-    @Override
-    default void clear() {
-        getItems().clear();
-    }
-
-    /**
-     * Marks the state as dirty.
-     * Must be called after changes in the inventory, so that the game can properly save
-     * the inventory contents and notify neighboring blocks of inventory changes.
-     */
-    @Override
-    default void markDirty() {
-        // Override if you want behavior.
-    }
-
-    @Override
     default boolean canPlayerUse(PlayerEntity player) {
         return true;
     }
 
-    @Override
-    default int getMaxCountPerStack() {
-        return 1;
+    default void clear() {
+        getItems().clear();
+    }
+
+    default void markDirty() {
+
+    }
+
+    default int[] getAvailableSlots(Direction side) {
+        return new int[0];
+    }
+
+    default boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
+        return true;
+    }
+
+    default boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        return true;
     }
 }

@@ -53,6 +53,10 @@ public class PipeSplitter extends PipeBase {
             can = true;
         }
 
+        if (state.get(Props.facing) == direction) {
+            can = true;
+        }
+
         return can;
     }
 

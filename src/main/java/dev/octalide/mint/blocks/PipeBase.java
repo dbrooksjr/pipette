@@ -1,14 +1,12 @@
 package dev.octalide.mint.blocks;
 
+import dev.octalide.mint.blockentities.PipeEntityBase;
 import dev.octalide.mint.items.MItems;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -17,7 +15,6 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.*;
-import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -48,8 +45,14 @@ public abstract class PipeBase extends BlockWithEntity implements BlockEntityPro
         ActionResult result = ActionResult.PASS;
 
         if (player.isHolding(MItems.PIPE_WRENCH)) {
-            // toggle direction
-            state = state.with(Props.facing, state.get(Props.facing).getOpposite());
+            // rotate direction
+            Direction facing = state.get(Props.facing);
+            Direction rotated = facing;
+
+            if (facing != Direction.DOWN && facing != Direction.UP) rotated = facing.rotateYClockwise();
+            else rotated = facing.getOpposite();
+
+            state = state.with(Props.facing, rotated);
             state = updateExtensions(state, world, pos);
 
             world.setBlockState(pos, state);
@@ -61,7 +64,38 @@ public abstract class PipeBase extends BlockWithEntity implements BlockEntityPro
         return result;
     }
 
-    protected abstract boolean canExtend(BlockState state, BlockState other, Direction direction);
+    protected boolean canExtend(BlockState state, BlockState other, Direction direction) {
+        boolean can = false;
+
+        DirectionProperty[] props = {
+            Properties.FACING,
+            Properties.HORIZONTAL_FACING,
+            Properties.HOPPER_FACING
+        };
+
+        if (other.getBlock() == Blocks.HOPPER) {
+            can = Arrays.stream(props).anyMatch(directionProperty ->
+                other.contains(directionProperty) && other.get(directionProperty) == direction.getOpposite());
+
+        } else if (other.getBlock() == MBlocks.PIPE) {
+            can = other.get(Properties.FACING) == direction.getOpposite();
+
+        } else if (other.getBlock() == MBlocks.PIPE_EXTRACTOR) {
+            can = other.get(Properties.FACING) == direction.getOpposite() || other.get(Properties.FACING) == direction;
+
+        } else if (other.getBlock() == MBlocks.PIPE_FILTER) {
+            can = other.get(Properties.FACING) == direction.getOpposite() || other.get(Properties.FACING) == direction;
+
+        } else if (other.getBlock() == MBlocks.PIPE_SPLITTER) {
+            can = true;
+        }
+
+        if (state.get(Props.facing) == direction) {
+            can = true;
+        }
+
+        return can;
+    }
 
     protected BlockState updateExtensions(BlockState state, World world, BlockPos pos) {
         for (Entry<Direction, BooleanProperty> extension : Props.extensions.entrySet()) {
@@ -211,13 +245,8 @@ public abstract class PipeBase extends BlockWithEntity implements BlockEntityPro
 
             VoxelShape shape = CORE;
 
-            Direction facing = state.get(Props.facing);
-
             // maximum of 6 possible extension shapes including an output and 5 inputs
             ArrayList<VoxelShape> extensionShapes = new ArrayList<>();
-
-            // add extension for facing direction (always present)
-            extensionShapes.add(EXTENSIONS[facing.getId()]);
 
             // add each extension shape
             Props.extensions.forEach((direction, prop) -> {

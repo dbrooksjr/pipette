@@ -33,6 +33,7 @@ public class Mint implements ModInitializer {
             stacks.add(new ItemStack(MBlocks.PIPE_EXTRACTOR));
             stacks.add(new ItemStack(MBlocks.PIPE_FILTER));
             stacks.add(new ItemStack(MBlocks.PIPE_SPLITTER));
+            stacks.add(new ItemStack(MBlocks.PIPE_DISPOSAL));
             stacks.add(new ItemStack(MItems.TELESCOPIC_BEAM));
         })
         .build();
@@ -46,7 +47,5 @@ public class Mint implements ModInitializer {
 
         System.out.println("Registering blocks...");
         MBlocks.register();
-
-        System.out.println("Successfully initialized mint.");
     }
 }

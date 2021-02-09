@@ -12,7 +12,6 @@ version = project.mod_version
 group = project.maven_group
 
 def libgui_version = project.libgui_version
-def libba = project.libba_version
 def gameVersion = project.minecraft_version
 
 repositories {
@@ -35,9 +34,6 @@ dependencies {
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation include("io.github.cottonmc:LibGui:${libgui_version}")
-
-    modCompile "alexiil.mc.lib:libblockattributes-all:${libba}"
-
 }
 
 processResources {
