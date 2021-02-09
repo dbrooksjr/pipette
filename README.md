@@ -26,11 +26,6 @@ Currently implemented:
 - [ ] Telescopic Piston
 - [ ] Mining Drill
 
-Additions
----
-
-This section covers the things mint adds to Minecraft.
-
 # Items
 
 ## Telescopic Beam
