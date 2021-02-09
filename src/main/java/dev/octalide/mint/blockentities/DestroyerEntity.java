@@ -1,6 +1,6 @@
 package dev.octalide.mint.blockentities;
 
-import dev.octalide.mint.blocks.Destructor;
+import dev.octalide.mint.blocks.Destroyer;
 import dev.octalide.mint.blocks.MBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -14,7 +14,7 @@ import net.minecraft.tag.Tag;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.math.BlockPos;
 
-public class DestructorEntity extends BlockEntity implements Tickable {
+public class DestroyerEntity extends BlockEntity implements Tickable {
     private static final int DELAY_MAX = 8;
     private static final int PROGRESS_MAX = 9;
     private static final int PROGRESS_MIN = -1;
@@ -24,14 +24,14 @@ public class DestructorEntity extends BlockEntity implements Tickable {
     private int progress;
     private int delay;
 
-    public DestructorEntity() {
-        super(MBlocks.DESTRUCTOR_ENTITY);
+    public DestroyerEntity() {
+        super(MBlocks.DESTROYER_ENTITY);
     }
 
     private boolean canMine(BlockState target) {
         if (world == null || world.isClient()) return false;
 
-        if (!getCachedState().get(Destructor.Props.powered)) return false;
+        if (!getCachedState().get(Destroyer.Props.powered)) return false;
         if (target.getBlock() == Blocks.AIR) return false;
         if (target.getBlock().isIn(BLACKLIST)) return false;
         if (target.getMaterial() == Material.WATER || target.getMaterial() == Material.LAVA) return false;
@@ -43,7 +43,7 @@ public class DestructorEntity extends BlockEntity implements Tickable {
     public void tick() {
         if (world == null) return;
 
-        BlockPos targetPos = pos.offset(getCachedState().get(Destructor.Props.facing));
+        BlockPos targetPos = pos.offset(getCachedState().get(Destroyer.Props.facing));
         BlockState target = world.getBlockState(targetPos);
 
         if (canMine(target)) {
@@ -68,7 +68,7 @@ public class DestructorEntity extends BlockEntity implements Tickable {
 
 
         /*
-        Can't figure out how to display this for multiple destructors.
+        Can't figure out how to display the progress for multiple destroyers.
         This is an issue where the client seems to only save one block breaking state per player entity.
         might be possible to display breaking info through a mixin or something, but for now, just gonna let it be :(
 

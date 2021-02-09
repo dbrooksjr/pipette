@@ -2,7 +2,7 @@
     "type": "minecraft:crafting_shaped",
     "pattern": [
         "ccc",
-        "ctc",
+        "cdc",
         "crc"
     ],
     "key": {
@@ -12,12 +12,12 @@
         "r": {
             "item": "minecraft:redstone"
         },
-        "t": {
-            "item": "minecraft:tnt"
+        "d": {
+            "item": "minecraft:diamond"
         }
     },
     "result": {
-        "item": "mint:destructor",
+        "item": "mint:destroyer",
         "count": 1
     }
 }

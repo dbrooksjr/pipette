@@ -22,7 +22,7 @@ Currently implemented:
     - [x] Splitter Pipe
     - [ ] Ender Pipe
 - [ ] Placer
-- [x] Breaker
+- [x] Destroyer
 - [ ] Telescopic Piston
 - [ ] Mining Drill
 
@@ -91,11 +91,11 @@ Ender Pipes:
 The Placer is similar to an item Dispenser from vanilla Minecraft. The only difference is when a block is put in a
 Placer, and it's activated with a redstone signal, the Placer will *place* that block in the direction it's facing.
 
-## Breaker
+## Destroyer
 
-A Breaker is the opposite of a Placer. When given a redstone signal, it will *break* the block in the direction it's
-facing. Note that the Breaker does NOT have an internal inventory and WILL leave the resulting item drop where it
-spawns.
+A Destroyer is the opposite of a Placer. When given a redstone signal, it will break the block in the direction it's
+facing. Note that the Destroyer does NOT have an internal inventory and WILL leave the resulting item drop where it
+spawns. Use a hopper!
 
 ## Telescopic Piston
 

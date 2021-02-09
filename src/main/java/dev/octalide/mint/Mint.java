@@ -35,7 +35,7 @@ public class Mint implements ModInitializer {
             stacks.add(new ItemStack(MBlocks.PIPE_FILTER));
             stacks.add(new ItemStack(MBlocks.PIPE_SPLITTER));
             stacks.add(new ItemStack(MBlocks.PIPE_DISPOSAL));
-            stacks.add(new ItemStack(MBlocks.DESTRUCTOR));
+            stacks.add(new ItemStack(MBlocks.DESTROYER));
         })
         .build();
 

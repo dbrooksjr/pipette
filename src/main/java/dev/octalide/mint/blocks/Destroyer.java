@@ -1,7 +1,7 @@
 package dev.octalide.mint.blocks;
 
 import dev.octalide.mint.Mint;
-import dev.octalide.mint.blockentities.DestructorEntity;
+import dev.octalide.mint.blockentities.DestroyerEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -20,11 +20,12 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class Destructor extends BlockWithEntity implements BlockEntityProvider {
-    public static final String NAME = "destructor";
+@SuppressWarnings("deprecation")
+public class Destroyer extends BlockWithEntity implements BlockEntityProvider {
+    public static final String NAME = "destroyer";
     public static final Identifier ID = new Identifier(Mint.MOD_ID, NAME);
 
-    public Destructor() {
+    public Destroyer() {
         super(FabricBlockSettings.of(Material.METAL)
             .nonOpaque()
             .strength(0.5f)
@@ -73,7 +74,7 @@ public class Destructor extends BlockWithEntity implements BlockEntityProvider {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockView world) {
-        return new DestructorEntity();
+        return new DestroyerEntity();
     }
 
     public static class Props {

@@ -1,25 +1,25 @@
 {
     "variants": {
         "facing=down": {
-            "model": "mint:block/destructor_vertical",
+            "model": "mint:block/destroyer_vertical",
             "x": 180
         },
         "facing=east": {
-            "model": "mint:block/destructor",
+            "model": "mint:block/destroyer",
             "y": 90
         },
         "facing=north": {
-            "model": "mint:block/destructor"
+            "model": "mint:block/destroyer"
         },
         "facing=south": {
-            "model": "mint:block/destructor",
+            "model": "mint:block/destroyer",
             "y": 180
         },
         "facing=up": {
-            "model": "mint:block/destructor_vertical"
+            "model": "mint:block/destroyer_vertical"
         },
         "facing=west": {
-            "model": "mint:block/destructor",
+            "model": "mint:block/destroyer",
             "y": 270
         }
     }
