@@ -3,7 +3,7 @@
 
 # Mint
 
-Mint is a mod for Minecraft that adds a few [Min]or [T]weaks.
+Mint is a mod for Minecraft that adds a few **Min**or **T**weaks.
 
 The goal of mint is to improve QOL and automation capabilities while maintaining the vanilla minecraft "feel" we all
 hold so dear. This is achieved by keeping things wrapped into existing core gameplay mechanics. For example, most of the
