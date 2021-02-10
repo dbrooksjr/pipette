@@ -9,12 +9,12 @@ import net.minecraft.util.registry.Registry;
 
 public class MBlocks {
 
-    public static Pipe PIPE;
-    public static PipeExtractor PIPE_EXTRACTOR;
-    public static PipeFilter PIPE_FILTER;
-    public static PipeSplitter PIPE_SPLITTER;
-    public static PipeDisposal PIPE_DISPOSAL;
-    public static Destroyer DESTROYER;
+    public static Pipe PIPE = new Pipe();
+    public static PipeExtractor PIPE_EXTRACTOR = new PipeExtractor();
+    public static PipeFilter PIPE_FILTER = new PipeFilter();
+    public static PipeSplitter PIPE_SPLITTER = new PipeSplitter();
+    public static PipeDisposal PIPE_DISPOSAL = new PipeDisposal();
+    public static Destroyer DESTROYER = new Destroyer();
 
     public static BlockEntityType<PipeEntity> PIPE_ENTITY;
     public static BlockEntityType<PipeExtractorEntity> PIPE_EXTRACTOR_ENTITY;
@@ -47,14 +47,5 @@ public class MBlocks {
         Registry.register(Registry.ITEM, PipeSplitter.ID, new BlockItem(PIPE_SPLITTER, new FabricItemSettings().group(ItemGroup.REDSTONE)));
         Registry.register(Registry.ITEM, PipeDisposal.ID, new BlockItem(PIPE_DISPOSAL, new FabricItemSettings().group(ItemGroup.REDSTONE)));
         Registry.register(Registry.ITEM, Destroyer.ID, new BlockItem(DESTROYER, new FabricItemSettings().group(ItemGroup.REDSTONE)));
-    }
-
-    static {
-        PIPE = new Pipe();
-        PIPE_EXTRACTOR = new PipeExtractor();
-        PIPE_FILTER = new PipeFilter();
-        PIPE_SPLITTER = new PipeSplitter();
-        PIPE_DISPOSAL = new PipeDisposal();
-        DESTROYER = new Destroyer();
     }
 }
