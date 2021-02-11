@@ -21,18 +21,18 @@ public class PipeSplitterEntity extends PipeEntityBase {
         if (this.isEmpty()) return false;
         if (getCachedState().get(PipeBase.Props.powered)) return false;
 
-        Direction facing = getCachedState().get(PipeBase.Props.facing);
-        Direction target = selectNextOutput(facing);
+        Direction output = getCachedState().get(PipeBase.Props.output);
+        Direction target = selectNextOutput(output);
         // no valid output directions
         if(target == null) return false;
 
-        Inventory output = HopperBlockEntity.getInventoryAt(world, pos.offset(target));
+        Inventory outputInventory = HopperBlockEntity.getInventoryAt(world, pos.offset(target));
 
-        if (output == null) return false;
+        if (outputInventory == null) return false;
 
         currentOutput = target.getId();
 
-        return transfer(this, output, facing.getOpposite());
+        return transfer(this, outputInventory, output.getOpposite());
     }
 
     private Direction selectNextOutput(Direction facing) {
