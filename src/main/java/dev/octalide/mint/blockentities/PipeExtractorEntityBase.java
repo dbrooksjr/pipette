@@ -25,15 +25,14 @@ public abstract class PipeExtractorEntityBase extends PipeEntityBase {
         if (!this.isEmpty()) return false;
         if (getCachedState().get(PipeBase.Props.powered)) return false;
 
-        Direction facing = getCachedState().get(PipeBase.Props.facing);
-        Direction target = facing.getOpposite();
+        Direction input = getCachedState().get(PipeBase.Props.input);
 
-        Inventory input = HopperBlockEntity.getInventoryAt(world, pos.offset(target));
+        Inventory inputInventory = HopperBlockEntity.getInventoryAt(world, pos.offset(input));
 
-        if (input == null) return false;
-        if (isInventoryEmpty(input, target)) return false;
+        if (inputInventory == null) return false;
+        if (isInventoryEmpty(inputInventory, input)) return false;
 
-        return getAvailableSlots(input, target).anyMatch(i -> extract(input, this, i, facing));
+        return getAvailableSlots(inputInventory, input).anyMatch(i -> extract(inputInventory, this, i, input));
     }
 
     protected boolean extract(Inventory from, Inventory to, int slot, Direction direction) {

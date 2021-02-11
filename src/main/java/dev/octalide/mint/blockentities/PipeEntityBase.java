@@ -28,12 +28,12 @@ public abstract class PipeEntityBase extends BlockEntity implements PipeInventor
         if (getCachedState().get(PipeBase.Props.powered)) return false;
         if (this.isEmpty()) return false;
 
-        Direction facing = getCachedState().get(Pipe.Props.facing);
+        Direction output = getCachedState().get(Pipe.Props.output);
 
-        Inventory output = HopperBlockEntity.getInventoryAt(world, pos.offset(facing));
-        if (output == null) return false;
+        Inventory outputInventory = HopperBlockEntity.getInventoryAt(world, pos.offset(output));
+        if (outputInventory == null) return false;
 
-        return transfer(this, output, facing.getOpposite());
+        return transfer(this, outputInventory, output.getOpposite());
     }
 
     protected static boolean transfer(Inventory from, Inventory to, Direction direction) {
@@ -75,7 +75,7 @@ public abstract class PipeEntityBase extends BlockEntity implements PipeInventor
 
     @Override
     public boolean canExtract(int slot, ItemStack stack, Direction dir) {
-        return this.getCachedState().get(PipeBase.Props.facing) != dir;
+        return this.getCachedState().get(PipeBase.Props.output) != dir;
     }
 
     @Override
