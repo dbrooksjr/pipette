@@ -30,9 +30,9 @@ public abstract class PipeExtractorEntityBase extends PipeEntityBase {
         Inventory inputInventory = HopperBlockEntity.getInventoryAt(world, pos.offset(input));
 
         if (inputInventory == null) return false;
-        if (isInventoryEmpty(inputInventory, input)) return false;
+        if (isInventoryEmpty(inputInventory, input.getOpposite())) return false;
 
-        return getAvailableSlots(inputInventory, input).anyMatch(i -> extract(inputInventory, this, i, input));
+        return getAvailableSlots(inputInventory, input.getOpposite()).anyMatch(i -> extract(inputInventory, this, i, input.getOpposite()));
     }
 
     protected boolean extract(Inventory from, Inventory to, int slot, Direction direction) {
@@ -53,12 +53,12 @@ public abstract class PipeExtractorEntityBase extends PipeEntityBase {
         return inventory instanceof SidedInventory ? IntStream.of(((SidedInventory)inventory).getAvailableSlots(side)) : IntStream.range(0, inventory.size());
     }
 
-    protected static boolean canExtract(Inventory inv, ItemStack stack, int slot, Direction facing) {
-        return !(inv instanceof SidedInventory) || ((SidedInventory)inv).canExtract(slot, stack, facing);
+    protected static boolean canExtract(Inventory inv, ItemStack stack, int slot, Direction direction) {
+        return !(inv instanceof SidedInventory) || ((SidedInventory)inv).canExtract(slot, stack, direction);
     }
 
-    protected static boolean isInventoryEmpty(Inventory inv, Direction facing) {
-        return getAvailableSlots(inv, facing).allMatch((i) -> inv.getStack(i).isEmpty());
+    protected static boolean isInventoryEmpty(Inventory inv, Direction direction) {
+        return getAvailableSlots(inv, direction).allMatch((i) -> inv.getStack(i).isEmpty());
     }
 
     @Override
