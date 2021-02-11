@@ -60,10 +60,38 @@ public abstract class PipeBase extends BlockWithEntity {
     }
 
     protected Direction getNextDirection(BlockState state, Direction current) {
-        if (current != Direction.DOWN && current != Direction.UP)
-            return current.rotateYClockwise();
-        else
-            return current.getOpposite();
+        Direction next = incrimentDirection(current);
+
+        if (next == state.get(Props.input)) next = incrimentDirection(next);
+
+        return next;
+    }
+
+    protected Direction incrimentDirection(Direction direction) {
+        Direction next = direction;
+
+        switch(direction) {
+            case DOWN:
+                next = Direction.UP;
+                break;
+            case UP:
+                next = Direction.NORTH;
+                break;
+            case NORTH:
+                next = Direction.SOUTH;
+                break;
+            case SOUTH:
+                next = Direction.WEST;
+                break;
+            case WEST:
+                next = Direction.EAST;
+                break;
+            case EAST:
+                next = Direction.DOWN;
+                break;
+        }
+
+        return next;
     }
 
     protected BlockState updateExtensions(BlockState state, World world, BlockPos pos) {
@@ -107,8 +135,18 @@ public abstract class PipeBase extends BlockWithEntity {
     public BlockState getPlacementState(ItemPlacementContext context) {
         BlockState state = this.getDefaultState();
 
-        state = state.with(Props.output, context.getSide().getOpposite());
-        state = state.with(Props.input, context.getSide().getOpposite());
+        Direction targetDirection = context.getSide().getOpposite();
+        BlockState target = context.getWorld().getBlockState(context.getBlockPos().offset(targetDirection));
+
+        Direction output = targetDirection;
+        if (target.getBlock() instanceof PipeBase && !context.getPlayer().isSneaking()) {
+            if (target.get(Props.output) == targetDirection.getOpposite()) {
+                output = target.get(Props.output);
+            }
+        }
+
+        state = state.with(Props.output, output);
+        state = state.with(Props.input, targetDirection);
         state = state.with(Props.powered, context.getWorld().isReceivingRedstonePower(context.getBlockPos()));
 
         for (Entry<Direction, BooleanProperty> extension : Props.extensions.entrySet()) {
