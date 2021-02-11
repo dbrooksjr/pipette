@@ -24,6 +24,15 @@ public class PipeExtractor extends PipeBase {
     }
 
     @Override
+    protected Direction getNextDirection(BlockState state, Direction current) {
+        Direction next = incrimentDirection(current);
+
+        if (next == state.get(Props.input)) next = incrimentDirection(next);
+
+        return next;
+    }
+
+    @Override
     public BlockState getPlacementState(ItemPlacementContext context) {
         BlockState state = super.getPlacementState(context);
 
