@@ -148,12 +148,7 @@ public abstract class PipeBase extends BlockWithEntity {
         state = state.with(Props.output, output);
         state = state.with(Props.input, targetDirection);
         state = state.with(Props.powered, context.getWorld().isReceivingRedstonePower(context.getBlockPos()));
-
-        for (Entry<Direction, BooleanProperty> extension : Props.extensions.entrySet()) {
-            BlockState facingBlock = context.getWorld().getBlockState(context.getBlockPos().offset(extension.getKey()));
-
-            state = state.with(extension.getValue(), canExtend(state, facingBlock, extension.getKey()));
-        }
+        state = updateExtensions(state, context.getWorld(), context.getBlockPos());
 
         return state;
     }
