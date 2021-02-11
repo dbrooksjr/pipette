@@ -13,6 +13,9 @@ C for item D for item... you get it.
 
 Visit the [Wiki](https://github.com/octalide/mint/wiki) for more information!
 
+CurseForge: https://www.curseforge.com/minecraft/mc-mods/mint
+Modrinth: https://modrinth.com/mod/mint
+
 > Mint is currently IN DEVELOPMENT. Not all features may be working or implemented.
 
 Currently implemented and working:
