@@ -31,22 +31,13 @@ public class PipeSplitter extends PipeBase {
             Blocks.SHULKER_BOX,
         };
 
-        if (Arrays.stream(linkable).anyMatch(block -> other.getBlock() == block)) {
-            can = true;
+        if (Arrays.stream(linkable).anyMatch(block -> other.getBlock() == block)) can = true;
+        else if (other.getBlock() == MBlocks.PIPE) can = true;
+        else if (other.getBlock() == MBlocks.PIPE_EXTRACTOR) can = true;
+        else if (other.getBlock() == MBlocks.PIPE_FILTER) can = true;
 
-        } else if (other.getBlock() == MBlocks.PIPE) {
-            can = true;
-
-        } else if (other.getBlock() == MBlocks.PIPE_EXTRACTOR) {
-            can = true;
-
-        } else if (other.getBlock() == MBlocks.PIPE_FILTER) {
-            can = true;
-        }
-
-        if (state.get(Props.facing) == direction) {
-            can = true;
-        }
+        if (state.get(Props.output) == direction) can = true;
+        if (state.get(Props.input) == direction) can = true;
 
         return can;
     }
