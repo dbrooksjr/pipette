@@ -3,8 +3,6 @@ package dev.octalide.mint.blockentities;
 import dev.octalide.mint.PipeInventoryImpl;
 import dev.octalide.mint.blocks.Pipe;
 import dev.octalide.mint.blocks.PipeBase;
-import dev.octalide.mint.blocks.PipeExtractor;
-import dev.octalide.mint.blocks.PipeFilter;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
