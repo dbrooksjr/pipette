@@ -13,11 +13,12 @@ import net.minecraft.util.math.Direction;
 import java.util.stream.IntStream;
 
 public abstract class PipeExtractorEntityBase extends PipeEntityBase {
-    public static int INPUT_COOLDOWN_MAX = 0;
-    private int inputCooldown = 0;
+    public int INPUT_COOLDOWN_MAX = 0;
+    protected int inputCooldown = 0;
 
     public PipeExtractorEntityBase(BlockEntityType type) {
         super(type);
+        this.OUTPUT_COOLDOWN_MAX = 0;
     }
 
 	protected boolean attemptInput() {
@@ -26,7 +27,6 @@ public abstract class PipeExtractorEntityBase extends PipeEntityBase {
         if (getCachedState().get(PipeBase.Props.powered)) return false;
 
         Direction input = getCachedState().get(PipeBase.Props.input);
-
         Inventory inputInventory = HopperBlockEntity.getInventoryAt(world, pos.offset(input));
 
         if (inputInventory == null) return false;
@@ -82,7 +82,7 @@ public abstract class PipeExtractorEntityBase extends PipeEntityBase {
     public CompoundTag toTag(CompoundTag tag) {
         tag = super.toTag(tag);
 
-        tag.putFloat("input_cooldown", inputCooldown);
+        tag.putInt("input_cooldown", inputCooldown);
 
         return tag;
     }
