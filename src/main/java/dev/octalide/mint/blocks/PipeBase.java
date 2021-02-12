@@ -43,9 +43,17 @@ public abstract class PipeBase extends BlockWithEntity {
         ActionResult result = ActionResult.PASS;
 
         if (player.isHolding(MItems.PIPE_WRENCH)) {
-            // rotate direction
-            Direction facing = state.get(Props.output);
-            Direction next = getNextDirection(state, facing);
+            // cycle input
+            if (player.isSneaking()) {
+                Direction input = state.get(Props.input);
+                Direction next = getNextDirection(state, input);
+
+                state = state.with(Props.input, next);
+            }
+
+            // cycle output
+            Direction output = state.get(Props.output);
+            Direction next = getNextDirection(state, output);
 
             state = state.with(Props.output, next);
             state = updateExtensions(state, world, pos);
@@ -68,7 +76,7 @@ public abstract class PipeBase extends BlockWithEntity {
     protected Direction incrimentDirection(Direction direction) {
         Direction next = direction;
 
-        switch(direction) {
+        switch (direction) {
             case DOWN:
                 next = Direction.UP;
                 break;
@@ -117,9 +125,11 @@ public abstract class PipeBase extends BlockWithEntity {
         else if (other.getBlock() == MBlocks.PIPE)
             can = other.get(Props.output) == direction.getOpposite();
         else if (other.getBlock() == MBlocks.PIPE_EXTRACTOR)
-            can = other.get(Props.output) == direction.getOpposite() || other.get(Props.input) == direction.getOpposite();
+            can = other.get(Props.output) == direction.getOpposite()
+                    || other.get(Props.input) == direction.getOpposite();
         else if (other.getBlock() == MBlocks.PIPE_FILTER)
-            can = other.get(Props.output) == direction.getOpposite() || other.get(Props.input) == direction.getOpposite();
+            can = other.get(Props.output) == direction.getOpposite()
+                    || other.get(Props.input) == direction.getOpposite();
         else if (other.getBlock() == MBlocks.PIPE_SPLITTER)
             can = true;
 
@@ -213,7 +223,8 @@ public abstract class PipeBase extends BlockWithEntity {
         public static Map<Direction, BooleanProperty> extensions;
         public static BooleanProperty powered = Properties.POWERED;
         public static DirectionProperty output = Properties.FACING;
-        // input is used by extractor-style pipes. while other pipes *do* have this state var, it's not used.
+        // input is used by extractor-style pipes. while other pipes *do* have this
+        // state var, it's not used.
         public static DirectionProperty input = DirectionProperty.of("input", Direction.NORTH, Direction.EAST,
                 Direction.SOUTH, Direction.WEST, Direction.UP, Direction.DOWN);
 

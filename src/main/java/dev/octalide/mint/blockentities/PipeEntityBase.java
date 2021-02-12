@@ -17,6 +17,9 @@ import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class PipeEntityBase extends BlockEntity implements PipeInventoryImpl, Tickable {
+    public int OUTPUT_COOLDOWN_MAX = 2;
+    protected int outputCooldown = 0;
+
     DefaultedList<ItemStack> items = DefaultedList.ofSize(1, ItemStack.EMPTY);
 
     public PipeEntityBase(BlockEntityType type) {
@@ -52,8 +55,18 @@ public abstract class PipeEntityBase extends BlockEntity implements PipeInventor
     @Override
     public void tick() {
         if (world == null || world.isClient()) return;
+        if (this.isEmpty()) {
+            outputCooldown = OUTPUT_COOLDOWN_MAX;
+            return;
+        }
+
+        outputCooldown--;
+        
+        if (outputCooldown > 0) return;
+        outputCooldown = 0;
 
         if (attemptOutput()) {
+            outputCooldown = OUTPUT_COOLDOWN_MAX;
             markDirty();
         }
     }
@@ -82,11 +95,13 @@ public abstract class PipeEntityBase extends BlockEntity implements PipeInventor
     public void fromTag(BlockState state, CompoundTag tag) {
         super.fromTag(state, tag);
         Inventories.fromTag(tag, items);
+        outputCooldown = tag.getInt("output_cooldown");
     }
 
     @Override
     public CompoundTag toTag(CompoundTag tag) {
         Inventories.toTag(tag, items);
+        tag.putInt("output_cooldown", outputCooldown);
         return super.toTag(tag);
     }
 }
