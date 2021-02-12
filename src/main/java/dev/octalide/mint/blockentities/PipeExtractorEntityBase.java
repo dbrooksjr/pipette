@@ -27,7 +27,6 @@ public abstract class PipeExtractorEntityBase extends PipeEntityBase {
         if (getCachedState().get(PipeBase.Props.powered)) return false;
 
         Direction input = getCachedState().get(PipeBase.Props.input);
-
         Inventory inputInventory = HopperBlockEntity.getInventoryAt(world, pos.offset(input));
 
         if (inputInventory == null) return false;
