@@ -43,14 +43,6 @@ public abstract class PipeBase extends BlockWithEntity {
         ActionResult result = ActionResult.PASS;
 
         if (player.isHolding(MItems.PIPE_WRENCH)) {
-            // cycle input
-            if (player.isSneaking()) {
-                Direction input = state.get(Props.input);
-                Direction next = getNextDirection(state, input);
-
-                state = state.with(Props.input, next);
-            }
-
             // cycle output
             Direction output = state.get(Props.output);
             Direction next = getNextDirection(state, output);
