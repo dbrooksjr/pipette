@@ -26,16 +26,14 @@ public class Pipette implements ModInitializer {
 
     public static final ItemGroup MINT_TAB = FabricItemGroupBuilder.create(
         new Identifier(Pipette.MOD_ID, "pipette_tab"))
-        .icon(() -> new ItemStack(PItems.TELESCOPIC_BEAM))
+        .icon(() -> new ItemStack(PItems.PIPE_WRENCH))
         .appendItems(stacks -> {
-            stacks.add(new ItemStack(PItems.TELESCOPIC_BEAM));
             stacks.add(new ItemStack(PItems.PIPE_WRENCH));
             stacks.add(new ItemStack(PBlocks.PIPE));
             stacks.add(new ItemStack(PBlocks.PIPE_EXTRACTOR));
             stacks.add(new ItemStack(PBlocks.PIPE_FILTER));
             stacks.add(new ItemStack(PBlocks.PIPE_SPLITTER));
             stacks.add(new ItemStack(PBlocks.PIPE_DISPOSAL));
-            stacks.add(new ItemStack(PBlocks.DESTROYER));
         })
         .build();
 
