@@ -26,6 +26,6 @@ If you *do* run into performance issues while using Pipette (or any other bug fo
 
 ## Where do I download Pipette?
 
-- GitHub: https://github.com/octalide/pipette/releases
-- Modrinth: https://modrinth.com/mod/pipette
-- CurseForge: https://www.curseforge.com/minecraft/mc-mods/pipette
+- GitHub: <https://github.com/octalide/pipette/releases>
+- Modrinth: <https://modrinth.com/mod/pipette>
+- CurseForge: <https://www.curseforge.com/minecraft/mc-mods/pipette>
