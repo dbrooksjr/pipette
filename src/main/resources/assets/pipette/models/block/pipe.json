@@ -1,0 +1,22 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"0": "pipette:block/pipe",
+		"particle": "pipette:block/pipe"
+	},
+	"elements": [
+		{
+			"from": [4, 4, 4],
+			"to": [12, 12, 12],
+			"faces": {
+				"north": {"uv": [16, 8, 8, 0], "texture": "#0"},
+				"east": {"uv": [8, 8, 0, 0], "rotation": 180, "texture": "#0"},
+				"south": {"uv": [16, 8, 8, 0], "texture": "#0"},
+				"west": {"uv": [8, 8, 0, 0], "texture": "#0"},
+				"up": {"uv": [8, 8, 0, 0], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [8, 8, 0, 0], "rotation": 270, "texture": "#0"}
+			}
+		}
+	]
+}

@@ -1,0 +1,7 @@
+{
+	"parent": "pipette:block/pipe",
+	"textures": {
+		"0": "pipette:block/pipe_extractor",
+		"particle": "pipette:block/pipe_extractor"
+	}
+}

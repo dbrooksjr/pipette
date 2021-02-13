@@ -1,0 +1,19 @@
+{
+    "itemGroup.pipette.pipette_tab": "Pipette",
+
+    "item.pipette.telescopic_beam": "Telescopic Beam",
+    "item.pipette.pipe_wrench": "Pipe Wrench",
+
+    "item.pipette.pipe": "Pipe",
+    "item.pipette.pipe_extractor": "Extractor Pipe",
+    "item.pipette.pipe_filter": "Filtered Extractor Pipe",
+    "item.pipette.pipe_splitter": "Splitter Pipe",
+    "item.pipette.pipe_disposal": "Disposal Pipe",
+
+    "block.pipette.pipe": "Pipe",
+    "block.pipette.pipe_extractor": "Extractor Pipe",
+    "block.pipette.pipe_filter": "Filtered Extractor Pipe",
+    "block.pipette.pipe_splitter": "Splitter Pipe",
+    "block.pipette.pipe_disposal": "Disposal Pipe",
+    "block.pipette.destroyer": "Destroyer"
+}

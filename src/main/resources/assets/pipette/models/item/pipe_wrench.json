@@ -1,0 +1,6 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "pipette:item/pipe_wrench"
+    }
+}

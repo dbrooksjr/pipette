@@ -1,0 +1,26 @@
+{
+    "variants": {
+        "facing=down": {
+            "model": "pipette:block/destroyer_vertical",
+            "x": 180
+        },
+        "facing=east": {
+            "model": "pipette:block/destroyer",
+            "y": 90
+        },
+        "facing=north": {
+            "model": "pipette:block/destroyer"
+        },
+        "facing=south": {
+            "model": "pipette:block/destroyer",
+            "y": 180
+        },
+        "facing=up": {
+            "model": "pipette:block/destroyer_vertical"
+        },
+        "facing=west": {
+            "model": "pipette:block/destroyer",
+            "y": 270
+        }
+    }
+}

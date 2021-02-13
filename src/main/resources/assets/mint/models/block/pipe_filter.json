@@ -1,7 +1,0 @@
-{
-	"parent": "mint:block/pipe",
-	"textures": {
-		"0": "mint:block/pipe_filter",
-		"particle": "mint:block/pipe_filter"
-	}
-}
