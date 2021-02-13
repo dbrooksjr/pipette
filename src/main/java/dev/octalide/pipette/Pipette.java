@@ -34,6 +34,7 @@ public class Pipette implements ModInitializer {
             stacks.add(new ItemStack(PBlocks.PIPE_FILTER));
             stacks.add(new ItemStack(PBlocks.PIPE_SPLITTER));
             stacks.add(new ItemStack(PBlocks.PIPE_DISPOSAL));
+            stacks.add(new ItemStack(PBlocks.PIPE_ENDER));
         })
         .build();
 
