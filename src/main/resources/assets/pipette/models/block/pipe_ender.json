@@ -1,5 +1,5 @@
 {
-	"credit": "Made with Blockbench",
+	"parent": "block/block",
 	"textures": {
 		"0": "pipette:block/pipe_ender",
 		"particle": "pipette:block/pipe_ender"
