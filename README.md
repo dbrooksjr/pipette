@@ -12,6 +12,18 @@ Pipette's main purpose is to allow for very achievable item transfer -- no compl
 
 Visit the [Wiki](https://github.com/octalide/pipette/wiki) for more information, examples, and even *pictures*!
 
+## Can/Should I use Pipette on my server?
+
+Yes! Please do!
+
+Do note, however, that players *will* have to have Pipette installed on their client to participate in the fun (this is inextricably unavoidable).
+
+### What about performance?
+
+Pipette is extremely optimized for performance. If you allow the use of Hoppers on your server, Pipette should be just fine. Pipette can actually *outperform* vanilla hoppers in many cases due to the simple nature of the pipes.
+
+If you *do* run into performance issues while using Pipette (or any other bug for that matter), PLEASE open a GitHub issue describing your situation in detail!
+
 ## Where do I download Pipette?
 
 - GitHub: https://github.com/octalide/pipette/releases
