@@ -1,28 +1,28 @@
 {
     "schemaVersion": 1,
-    "id": "mint",
+    "id": "pipette",
     "version": "${version}",
 
-    "name": "Mint",
-    "description": "Mint adds a set of simple changes to Minecraft that allow for significant improvements to automation and QOL, while maintaining the vanilla Minecraft feel we all hold so dear.",
+    "name": "Pipette",
+    "description": "Pipette adds a set of simple changes to Minecraft that allow for significant improvements to automation and QOL, while maintaining the vanilla Minecraft feel we all hold so dear.",
     "authors": [
         "octalide"
     ],
     "contact": {
-        "homepage": "https://github.com/octalide/mint",
-        "sources": "https://github.com/octalide/mint"
+        "homepage": "https://github.com/octalide/pipette",
+        "sources": "https://github.com/octalide/pipette"
     },
 
     "license": "CC0-1.0",
-    "icon": "assets/mint/icon.png",
+    "icon": "assets/pipette/icon.png",
 
     "environment": "*",
     "entrypoints": {
         "main": [
-            "dev.octalide.mint.Mint"
+            "dev.octalide.pipette.Pipette"
         ],
         "client": [
-            "dev.octalide.mint.MintClient"
+            "dev.octalide.pipette.PipetteClient"
         ]
     },
     "mixins": [

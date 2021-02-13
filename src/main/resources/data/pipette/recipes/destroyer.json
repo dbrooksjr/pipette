@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "ccc",
+        "cdc",
+        "crc"
+    ],
+    "key": {
+        "c": {
+            "item": "minecraft:cobblestone"
+        },
+        "r": {
+            "item": "minecraft:redstone"
+        },
+        "d": {
+            "item": "minecraft:diamond"
+        }
+    },
+    "result": {
+        "item": "pipette:destroyer",
+        "count": 1
+    }
+}

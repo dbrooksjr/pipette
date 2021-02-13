@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " i ",
+        "idi",
+        " i "
+    ],
+    "key": {
+        "d": {
+            "item": "minecraft:dropper"
+        },
+        "i": {
+            "item": "minecraft:iron_ingot"
+        }
+    },
+    "result": {
+        "item": "pipette:pipe_splitter",
+        "count": 4
+    }
+}
