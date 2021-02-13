@@ -24,7 +24,7 @@ public class Pipette implements ModInitializer {
                 inventory,
                 ScreenHandlerContext.create(inventory.player.world, buf.readBlockPos())));
 
-    public static final ItemGroup MINT_TAB = FabricItemGroupBuilder.create(
+    public static final ItemGroup PIPETTE_TAB = FabricItemGroupBuilder.create(
         new Identifier(Pipette.MOD_ID, "pipette_tab"))
         .icon(() -> new ItemStack(PItems.PIPE_WRENCH))
         .appendItems(stacks -> {
