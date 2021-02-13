@@ -1,6 +1,6 @@
-package dev.octalide.pipette.items;
+package dev.octalide.pipette;
 
-import dev.octalide.pipette.Pipette;
+import dev.octalide.pipette.items.PipeWrench;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 

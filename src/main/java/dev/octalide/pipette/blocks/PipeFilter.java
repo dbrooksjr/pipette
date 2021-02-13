@@ -2,7 +2,7 @@ package dev.octalide.pipette.blocks;
 
 import dev.octalide.pipette.Pipette;
 import dev.octalide.pipette.blockentities.PipeFilterEntity;
-import dev.octalide.pipette.items.PItems;
+import dev.octalide.pipette.PItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;

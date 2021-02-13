@@ -1,4 +1,4 @@
-package dev.octalide.pipette.blockentities;
+package dev.octalide.pipette.api.blockentities;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
@@ -11,7 +11,7 @@ import net.minecraft.util.math.Direction;
 
 import java.util.stream.IntStream;
 
-import dev.octalide.pipette.blocks.PipeBase;
+import dev.octalide.pipette.api.blocks.PipeBase;
 
 public abstract class PipeExtractorEntityBase extends PipeEntityBase {
     public int INPUT_COOLDOWN_MAX = 0;

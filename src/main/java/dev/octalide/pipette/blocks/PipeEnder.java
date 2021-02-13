@@ -3,6 +3,7 @@ package dev.octalide.pipette.blocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
@@ -11,7 +12,9 @@ import net.minecraft.world.BlockView;
 
 import java.util.Arrays;
 
+import dev.octalide.pipette.PBlocks;
 import dev.octalide.pipette.Pipette;
+import dev.octalide.pipette.api.blocks.PipeBase;
 import dev.octalide.pipette.blockentities.PipeDisposalEntity;
 
 public class PipeEnder extends PipeBase {
@@ -50,5 +53,14 @@ public class PipeEnder extends PipeBase {
         }
 
         return can;
+    }
+
+    @Override
+    public BlockState getPlacementState(ItemPlacementContext context) {
+        BlockState state = super.getPlacementState(context);
+        
+        context.getPlayer().getGameProfile().getId();
+
+        return state;
     }
 }

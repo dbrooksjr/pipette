@@ -1,4 +1,4 @@
-package dev.octalide.pipette;
+package dev.octalide.pipette.api;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;

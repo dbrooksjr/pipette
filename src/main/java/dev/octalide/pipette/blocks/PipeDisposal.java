@@ -11,7 +11,9 @@ import net.minecraft.world.BlockView;
 
 import java.util.Arrays;
 
+import dev.octalide.pipette.PBlocks;
 import dev.octalide.pipette.Pipette;
+import dev.octalide.pipette.api.blocks.PipeBase;
 import dev.octalide.pipette.blockentities.PipeDisposalEntity;
 
 public class PipeDisposal extends PipeBase {

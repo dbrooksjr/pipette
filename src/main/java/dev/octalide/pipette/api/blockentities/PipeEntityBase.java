@@ -1,4 +1,4 @@
-package dev.octalide.pipette.blockentities;
+package dev.octalide.pipette.api.blockentities;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -17,15 +17,14 @@ import java.util.Map.Entry;
 
 import org.jetbrains.annotations.Nullable;
 
-import dev.octalide.pipette.PipeInventoryImpl;
-import dev.octalide.pipette.blocks.Pipe;
-import dev.octalide.pipette.blocks.PipeBase;
+import dev.octalide.pipette.api.PipeInventoryImpl;
+import dev.octalide.pipette.api.blocks.PipeBase;
 
 public abstract class PipeEntityBase extends BlockEntity implements PipeInventoryImpl, Tickable {
     public int OUTPUT_COOLDOWN_MAX = 0;
     protected int outputCooldown = 0;
 
-    DefaultedList<ItemStack> items = DefaultedList.ofSize(1, ItemStack.EMPTY);
+    protected DefaultedList<ItemStack> items = DefaultedList.ofSize(1, ItemStack.EMPTY);
 
     public PipeEntityBase(BlockEntityType type) {
         super(type);
@@ -53,7 +52,7 @@ public abstract class PipeEntityBase extends BlockEntity implements PipeInventor
                 return true;
         }
 
-        Direction output = getCachedState().get(Pipe.Props.output);
+        Direction output = getCachedState().get(PipeBase.Props.output);
 
         Inventory outputInventory = HopperBlockEntity.getInventoryAt(world, pos.offset(output));
         if (outputInventory == null)
@@ -63,12 +62,12 @@ public abstract class PipeEntityBase extends BlockEntity implements PipeInventor
     }
 
     protected PipeExtractorEntityBase getExtractor() {
-        for (Entry<Direction, BooleanProperty> extension : Pipe.Props.extensions.entrySet()) {
+        for (Entry<Direction, BooleanProperty> extension : PipeBase.Props.extensions.entrySet()) {
             BlockState state = world.getBlockState(pos.offset(extension.getKey()));
 
             if (state.getBlock() instanceof PipeBase) {
                 // there is a pipe connected
-                if (state.get(Pipe.Props.input).getOpposite() == extension.getKey()) {
+                if (state.get(PipeBase.Props.input).getOpposite() == extension.getKey()) {
                     // the pipes's input is this pipe
                     BlockEntity entity = world.getBlockEntity(pos.offset(extension.getKey()));
 

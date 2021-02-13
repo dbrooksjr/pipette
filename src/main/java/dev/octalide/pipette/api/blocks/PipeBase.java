@@ -1,4 +1,4 @@
-package dev.octalide.pipette.blocks;
+package dev.octalide.pipette.api.blocks;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
@@ -28,8 +28,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import dev.octalide.pipette.blockentities.PipeEntityBase;
-import dev.octalide.pipette.items.PItems;
+import dev.octalide.pipette.PBlocks;
+import dev.octalide.pipette.PItems;
+import dev.octalide.pipette.api.blockentities.PipeEntityBase;
 
 public abstract class PipeBase extends BlockWithEntity {
     public PipeBase() {
@@ -216,8 +217,8 @@ public abstract class PipeBase extends BlockWithEntity {
         public static Map<Direction, BooleanProperty> extensions;
         public static BooleanProperty powered = Properties.POWERED;
         public static DirectionProperty output = Properties.FACING;
-        // input is used by extractor-style pipes. while other pipes *do* have this
-        // state var, it's not used.
+        // input is used by extractor-style pipes. while other pipes *do* have
+        // this state var, it's not used.
         public static DirectionProperty input = DirectionProperty.of("input", Direction.NORTH, Direction.EAST,
                 Direction.SOUTH, Direction.WEST, Direction.UP, Direction.DOWN);
 

@@ -1,6 +1,7 @@
 package dev.octalide.pipette.blockentities;
 
-import dev.octalide.pipette.blocks.PBlocks;
+import dev.octalide.pipette.PBlocks;
+import dev.octalide.pipette.api.blockentities.PipeExtractorEntityBase;
 import dev.octalide.pipette.screens.PipeFilterGuiDescription;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.entity.player.PlayerEntity;

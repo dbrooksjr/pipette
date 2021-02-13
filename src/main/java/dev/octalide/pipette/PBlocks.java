@@ -1,6 +1,8 @@
-package dev.octalide.pipette.blocks;
+package dev.octalide.pipette;
 
+import dev.octalide.pipette.blocks.*;
 import dev.octalide.pipette.blockentities.*;
+import dev.octalide.pipette.blockentities.PipeSplitterEntity;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.BlockItem;

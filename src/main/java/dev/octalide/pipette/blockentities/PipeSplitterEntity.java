@@ -1,7 +1,8 @@
 package dev.octalide.pipette.blockentities;
 
-import dev.octalide.pipette.blocks.PBlocks;
-import dev.octalide.pipette.blocks.PipeBase;
+import dev.octalide.pipette.PBlocks;
+import dev.octalide.pipette.api.blockentities.PipeEntityBase;
+import dev.octalide.pipette.api.blocks.PipeBase;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.inventory.Inventory;

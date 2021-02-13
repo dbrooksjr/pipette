@@ -2,7 +2,9 @@ package dev.octalide.pipette.blocks;
 
 import java.util.Arrays;
 
+import dev.octalide.pipette.PBlocks;
 import dev.octalide.pipette.Pipette;
+import dev.octalide.pipette.api.blocks.PipeBase;
 import dev.octalide.pipette.blockentities.PipeSplitterEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

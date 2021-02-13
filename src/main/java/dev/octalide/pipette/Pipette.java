@@ -1,8 +1,6 @@
 package dev.octalide.pipette;
 
-import dev.octalide.pipette.blocks.PBlocks;
 import dev.octalide.pipette.blocks.PipeFilter;
-import dev.octalide.pipette.items.PItems;
 import dev.octalide.pipette.screens.PipeFilterGuiDescription;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
