@@ -1,7 +1,7 @@
 # Pipette
 
-![build](https://github.com/octalide/pipette/workflows/build/badge.svg?branch=master)
-[![GitHub license](https://img.shields.io/github/license/octalide/pipette)](https://github.com/octalide/pipette/blob/master/LICENSE)
+![build](https://github.com/octalide/pipette/workflows/build/badge.svg?branch=main)
+[![GitHub license](https://img.shields.io/github/license/octalide/pipette)](https://github.com/octalide/pipette/blob/main/LICENSE)
 ![Mod loader: Fabric](https://img.shields.io/badge/modloader-Fabric-1976d2)
 <a href="https://www.curseforge.com/minecraft/mc-mods/fabric-api" title="Fabric API CurseForge"><img src="https://i.imgur.com/Ol1Tcf8.png" alt="Requires Fabric API" width="96" height="32"></a>
 
