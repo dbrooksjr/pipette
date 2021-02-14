@@ -22,24 +22,16 @@ public class PipeSplitter extends PipeBase {
     protected boolean canExtend(BlockState state, BlockState other, Direction direction) {
         boolean can = false;
 
-        Block[] linkable = {
-            Blocks.CHEST,
-            Blocks.FURNACE,
-            Blocks.DISPENSER,
-            Blocks.DROPPER,
-            Blocks.TRAPPED_CHEST,
-            Blocks.BARREL,
-            Blocks.HOPPER,
-            Blocks.SHULKER_BOX,
-        };
+        Block[] linkable = { Blocks.CHEST, Blocks.FURNACE, Blocks.DISPENSER, Blocks.DROPPER, Blocks.TRAPPED_CHEST,
+                Blocks.BARREL, Blocks.HOPPER, Blocks.SHULKER_BOX, };
 
-        if (Arrays.stream(linkable).anyMatch(block -> other.getBlock() == block)) can = true;
-        else if (other.getBlock() == PBlocks.PIPE) can = true;
-        else if (other.getBlock() == PBlocks.PIPE_EXTRACTOR) can = true;
-        else if (other.getBlock() == PBlocks.PIPE_FILTER) can = true;
+        if (Arrays.stream(linkable).anyMatch(block -> other.getBlock() == block))
+            can = true;
+        else if (other.getBlock() instanceof PipeBase)
+            can = true;
 
-        if (state.get(Props.output) == direction) can = true;
-        if (state.get(Props.input) == direction) can = true;
+        if (state.get(Props.input) == direction)
+            can = true;
 
         return can;
     }
