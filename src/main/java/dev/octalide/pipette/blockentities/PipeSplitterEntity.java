@@ -2,7 +2,7 @@ package dev.octalide.pipette.blockentities;
 
 import dev.octalide.pipette.PBlocks;
 import dev.octalide.pipette.api.blockentities.PipeEntityBase;
-import dev.octalide.pipette.api.blocks.PipeBase;
+import dev.octalide.pipette.api.blocks.properties.PipeSplitterProps;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.inventory.Inventory;
@@ -20,7 +20,7 @@ public class PipeSplitterEntity extends PipeEntityBase {
     protected boolean attemptOutput() {
         if (world == null || world.isClient()) return false;
         if (this.isEmpty()) return false;
-        if (getCachedState().get(PipeBase.Props.powered)) return false;
+        if (getCachedState().get(PipeSplitterProps.powered)) return false;
 
         Direction target = selectNextOutput();
         // no valid output directions
@@ -63,7 +63,7 @@ public class PipeSplitterEntity extends PipeEntityBase {
             boolean invalid = false;
 
             // skip if this direction does not have an extension
-            if (!getCachedState().get(PipeBase.Props.extensions.get(next))) invalid = true;
+            if (!getCachedState().get(PipeSplitterProps.extensions.get(next))) invalid = true;
 
             // this output is valid
             if (!invalid) return next;

@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import dev.octalide.pipette.PBlocks;
 import dev.octalide.pipette.api.blockentities.PipeEntityBase;
-import dev.octalide.pipette.api.blocks.PipeBase;
+import dev.octalide.pipette.ender.EnderPipeChannel;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
@@ -12,6 +12,7 @@ import net.minecraft.util.collection.DefaultedList;
 
 public class PipeEnderEntity extends PipeEntityBase {
     private UUID owner;
+    private EnderPipeChannel channel;
 
     public PipeEnderEntity() {
         super(PBlocks.PIPE_ENDER_ENTITY);
@@ -19,19 +20,30 @@ public class PipeEnderEntity extends PipeEntityBase {
 
     @Override
     protected boolean attemptOutput() {
-        if (getCachedState().get(PipeBase.Props.powered)) return false;
-        if (this.isEmpty()) return false;
-
-        return true;
+        return false;
     }
 
     public void setOwner(UUID uuid) {
         owner = uuid;
     }
 
+    public EnderPipeChannel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(EnderPipeChannel channel) {
+        System.out.printf("channel set: %s $s", channel.getOwner(), channel.getName());
+        this.channel = channel;
+    }
+
     @Override
     public DefaultedList<ItemStack> getItems() {
-        return this.items;
+        return channel == null ? DefaultedList.ofSize(1, ItemStack.EMPTY) : channel.getItems();
+    }
+
+    @Override
+    public void markDirty() {
+        channel.markDirty();
     }
 
     @Override

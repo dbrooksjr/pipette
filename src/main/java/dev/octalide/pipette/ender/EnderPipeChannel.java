@@ -1,16 +1,43 @@
 package dev.octalide.pipette.ender;
 
+import net.minecraft.inventory.Inventories;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtHelper;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.collection.DefaultedList;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
-public class EnderPipeChannel {
+import org.jetbrains.annotations.Nullable;
+
+import dev.octalide.pipette.api.PipeInventoryImpl;
+
+public class EnderPipeChannel implements PipeInventoryImpl {
+    private ServerWorld world;
+
+    private String name;
     private UUID owner;
     private ArrayList<UUID> whitelist = new ArrayList<>();
+
+    protected DefaultedList<ItemStack> items = DefaultedList.ofSize(1, ItemStack.EMPTY);
+
+    public EnderPipeChannel(ServerWorld world, String name, UUID owner, @Nullable ArrayList<UUID> whitelist) {
+        this.world = world;
+        this.name = name;
+        this.owner = owner;
+        this.whitelist = whitelist != null ? whitelist : new ArrayList<>();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public UUID getOwner() {
         return owner;
@@ -24,28 +51,73 @@ public class EnderPipeChannel {
         return whitelist;
     }
 
+    public void addPlayerToWhitelist(UUID player) {
+        whitelist.add(player);
+    }
+
+    public void removePlayerFromWhitelist(UUID player) {
+        whitelist.remove(player);
+    }
+
     public boolean canPlayerUse(UUID player) {
         return player == owner || whitelist.contains(player);
     }
 
-    public CompoundTag toTag(CompoundTag tag) {
-        ListTag list = whitelist.stream().map(NbtHelper::fromUuid).collect(Collectors.toCollection(ListTag::new));
+    @Override
+    public DefaultedList<ItemStack> getItems() {
+        return items;
+    }
 
-        tag.put("whitelist", list);
+    public void remove() {
+        EnderChannelState ecs = EnderChannelState.getState(world);
+        ecs.remove(this);
+    }
+
+    @Override
+    public void markDirty() {
+        EnderChannelState.getState(world).markDirty();
+    }
+
+    public CompoundTag toTag(CompoundTag tag) {
+        System.out.println("EPC toTag");
+
+        ListTag list = new ListTag();
+        for (UUID player : whitelist) {
+            System.out.printf("adding whitelisted player: %s\n", player);
+            list.add(NbtHelper.fromUuid(player));
+        }
+
+        System.out.println("EPC list created");
+
+        tag.putString("name", name);
         tag.putUuid("owner", owner);
+        tag.put("whitelist", list);
+        Inventories.toTag(tag, items);
+
+        System.out.println("EPC returning tag");
 
         return tag;
     }
 
-    public static EnderPipeChannel fromTag(CompoundTag tag) {
-        EnderPipeChannel epc = new EnderPipeChannel();
+    public static EnderPipeChannel getOrCreate(ServerWorld world, String name, UUID owner, @Nullable ArrayList<UUID> whitelist) {
+        return EnderChannelState.getState(world).getOrCreateChannel(world, name, owner, whitelist);
+    }
+
+    public static EnderPipeChannel fromTag(ServerWorld world, CompoundTag tag) {
+        System.out.println("EPC fromTag");
+        String name;
+        UUID owner;
+        ArrayList<UUID> whitelist = new ArrayList<>();
         
+        name = tag.getString("name");
+        owner = tag.getUuid("owner");
+
         // 11 is the type for IntArrayTag
-        ListTag list = tag.getList("whitelist", 11);
-        list.forEach(uuidTag -> epc.whitelist.add(NbtHelper.toUuid(uuidTag)));
+        tag.getList("whitelist", 11).forEach(uuidTag -> whitelist.add(NbtHelper.toUuid(uuidTag)));
 
-        epc.owner = tag.getUuid("owner");
+        EnderPipeChannel ecs = new EnderPipeChannel(world, name, owner, whitelist);
+        Inventories.fromTag(tag, ecs.items);
 
-        return epc;
+        return ecs;
     }
 }

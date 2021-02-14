@@ -18,7 +18,9 @@ import java.util.Map.Entry;
 import org.jetbrains.annotations.Nullable;
 
 import dev.octalide.pipette.api.PipeInventoryImpl;
-import dev.octalide.pipette.api.blocks.PipeBase;
+import dev.octalide.pipette.api.blocks.properties.PipeExtractorProps;
+import dev.octalide.pipette.api.blocks.properties.PipeProps;
+import dev.octalide.pipette.blocks.PipeExtractor;
 
 public abstract class PipeEntityBase extends BlockEntity implements PipeInventoryImpl, Tickable {
     public int OUTPUT_COOLDOWN_MAX = 0;
@@ -26,14 +28,14 @@ public abstract class PipeEntityBase extends BlockEntity implements PipeInventor
 
     protected DefaultedList<ItemStack> items = DefaultedList.ofSize(1, ItemStack.EMPTY);
 
-    public PipeEntityBase(BlockEntityType type) {
+    public PipeEntityBase(BlockEntityType<?> type) {
         super(type);
     }
 
     protected boolean attemptOutput() {
         if (world == null || world.isClient())
             return false;
-        if (getCachedState().get(PipeBase.Props.powered))
+        if (getCachedState().get(PipeProps.powered))
             return false;
         if (this.isEmpty())
             return false;
@@ -52,7 +54,7 @@ public abstract class PipeEntityBase extends BlockEntity implements PipeInventor
                 return true;
         }
 
-        Direction output = getCachedState().get(PipeBase.Props.output);
+        Direction output = getCachedState().get(PipeProps.output);
 
         Inventory outputInventory = HopperBlockEntity.getInventoryAt(world, pos.offset(output));
         if (outputInventory == null)
@@ -62,12 +64,12 @@ public abstract class PipeEntityBase extends BlockEntity implements PipeInventor
     }
 
     protected PipeExtractorEntityBase getExtractor() {
-        for (Entry<Direction, BooleanProperty> extension : PipeBase.Props.extensions.entrySet()) {
+        for (Entry<Direction, BooleanProperty> extension : PipeProps.extensions.entrySet()) {
             BlockState state = world.getBlockState(pos.offset(extension.getKey()));
 
-            if (state.getBlock() instanceof PipeBase) {
-                // there is a pipe connected
-                if (state.get(PipeBase.Props.input).getOpposite() == extension.getKey()) {
+            if (state.getBlock() instanceof PipeExtractor) {
+                // there is an extractor pipe connected
+                if (state.get(PipeExtractorProps.input).getOpposite() == extension.getKey()) {
                     // the pipes's input is this pipe
                     BlockEntity entity = world.getBlockEntity(pos.offset(extension.getKey()));
 
@@ -131,7 +133,7 @@ public abstract class PipeEntityBase extends BlockEntity implements PipeInventor
 
     @Override
     public boolean canExtract(int slot, ItemStack stack, Direction dir) {
-        return this.getCachedState().get(PipeBase.Props.output) != dir;
+        return this.getCachedState().get(PipeProps.output) != dir;
     }
 
     @Override

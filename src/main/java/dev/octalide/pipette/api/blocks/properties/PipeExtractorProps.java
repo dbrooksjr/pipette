@@ -4,22 +4,22 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.Direction;
 
-public class PipeProps extends PipePropsBase {
-    public static DirectionProperty output = Properties.FACING;
+public class PipeExtractorProps extends PipeProps {
+    public static DirectionProperty input = DirectionProperty.of("input", Direction.NORTH, Direction.EAST,
+            Direction.SOUTH, Direction.WEST, Direction.UP, Direction.DOWN);
 
     public static void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        PipePropsBase.appendProperties(builder);
+        PipeProps.appendProperties(builder);
 
-        builder.add(output);
+        builder.add(input);
     }
 
     public static BlockState buildDefaultState(BlockState state) {
-        state = PipePropsBase.buildDefaultState(state);
-        state = state.with(output, Direction.NORTH);
-        
+        state = PipeProps.buildDefaultState(state);
+        state = state.with(input, Direction.NORTH);
+
         return state;
     }
 }

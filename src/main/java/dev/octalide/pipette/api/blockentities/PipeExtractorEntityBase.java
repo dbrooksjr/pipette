@@ -11,13 +11,13 @@ import net.minecraft.util.math.Direction;
 
 import java.util.stream.IntStream;
 
-import dev.octalide.pipette.api.blocks.PipeBase;
+import dev.octalide.pipette.api.blocks.properties.PipeExtractorProps;
 
 public abstract class PipeExtractorEntityBase extends PipeEntityBase {
     public int INPUT_COOLDOWN_MAX = 0;
     protected int inputCooldown = 0;
 
-    public PipeExtractorEntityBase(BlockEntityType type) {
+    public PipeExtractorEntityBase(BlockEntityType<?> type) {
         super(type);
         this.OUTPUT_COOLDOWN_MAX = 0;
     }
@@ -25,9 +25,9 @@ public abstract class PipeExtractorEntityBase extends PipeEntityBase {
 	protected boolean attemptInput() {
         if (world == null || world.isClient()) return false;
         if (!this.isEmpty()) return false;
-        if (getCachedState().get(PipeBase.Props.powered)) return false;
+        if (getCachedState().get(PipeExtractorProps.powered)) return false;
 
-        Direction input = getCachedState().get(PipeBase.Props.input);
+        Direction input = getCachedState().get(PipeExtractorProps.input);
         Inventory inputInventory = HopperBlockEntity.getInventoryAt(world, pos.offset(input));
 
         if (inputInventory == null) return false;

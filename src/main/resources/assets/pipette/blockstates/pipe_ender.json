@@ -2,7 +2,6 @@
     "multipart": [
         {
             "when": {
-                "facing": "north",
                 "powered": false
             },
             "apply": {
@@ -11,111 +10,10 @@
         },
         {
             "when": {
-                "facing": "east",
-                "powered": false
-            },
-            "apply": {
-                "model": "pipette:block/pipe_ender",
-                "y": 90
-            }
-        },
-        {
-            "when": {
-                "facing": "south",
-                "powered": false
-            },
-            "apply": {
-                "model": "pipette:block/pipe_ender",
-                "y": 180
-            }
-        },
-        {
-            "when": {
-                "facing": "west",
-                "powered": false
-            },
-            "apply": {
-                "model": "pipette:block/pipe_ender",
-                "y": 270
-            }
-        },
-        {
-            "when": {
-                "facing": "down",
-                "powered": false
-            },
-            "apply": {
-                "model": "pipette:block/pipe_ender",
-                "x": 90
-            }
-        },
-        {
-            "when": {
-                "facing": "up",
-                "powered": false
-            },
-            "apply": {
-                "model": "pipette:block/pipe_ender",
-                "x": -90
-            }
-        },
-        {
-            "when": {
-                "facing": "north",
                 "powered": true
             },
             "apply": {
                 "model": "pipette:block/pipe_ender"
-            }
-        },
-        {
-            "when": {
-                "facing": "east",
-                "powered": true
-            },
-            "apply": {
-                "model": "pipette:block/pipe_ender",
-                "y": 90
-            }
-        },
-        {
-            "when": {
-                "facing": "south",
-                "powered": true
-            },
-            "apply": {
-                "model": "pipette:block/pipe_ender",
-                "y": 180
-            }
-        },
-        {
-            "when": {
-                "facing": "west",
-                "powered": true
-            },
-            "apply": {
-                "model": "pipette:block/pipe_ender",
-                "y": 270
-            }
-        },
-        {
-            "when": {
-                "facing": "down",
-                "powered": true
-            },
-            "apply": {
-                "model": "pipette:block/pipe_ender",
-                "x": 90
-            }
-        },
-        {
-            "when": {
-                "facing": "up",
-                "powered": true
-            },
-            "apply": {
-                "model": "pipette:block/pipe_ender",
-                "x": -90
             }
         },
         {
