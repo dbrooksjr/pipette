@@ -26,3 +26,15 @@ Visit the [Wiki](https://github.com/octalide/pipette/wiki) for more information,
 - GitHub: <https://github.com/octalide/pipette/releases>
 - Modrinth: <https://modrinth.com/mod/pipette>
 - CurseForge: <https://www.curseforge.com/minecraft/mc-mods/pipette>
+
+## Can/Should I use Pipette on my server?
+
+Yes! Please do!
+
+Do note, however, that players *will* have to have Pipette installed on their client to participate in the fun (this is inextricably unavoidable).
+
+### What about performance?
+
+Pipette is extremely optimized for performance. If you allow the use of Hoppers on your server, Pipette should be just fine. Pipette can actually *outperform* vanilla hoppers in many cases due to the simple nature of the pipes.
+
+If you *do* run into performance issues while using Pipette (or any other bug for that matter), PLEASE open a GitHub issue describing your situation in detail!
