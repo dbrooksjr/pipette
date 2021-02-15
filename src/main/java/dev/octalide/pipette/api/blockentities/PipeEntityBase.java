@@ -1,5 +1,9 @@
-package dev.octalide.pipette.blockentities;
+package dev.octalide.pipette.api.blockentities;
 
+import dev.octalide.pipette.api.PipeInventoryImpl;
+import dev.octalide.pipette.api.blocks.properties.PipeExtractorProps;
+import dev.octalide.pipette.api.blocks.properties.PipeProps;
+import dev.octalide.pipette.blocks.PipeExtractor;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -12,29 +16,24 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
-
-import java.util.Map.Entry;
-
 import org.jetbrains.annotations.Nullable;
 
-import dev.octalide.pipette.PipeInventoryImpl;
-import dev.octalide.pipette.blocks.Pipe;
-import dev.octalide.pipette.blocks.PipeBase;
+import java.util.Map.Entry;
 
 public abstract class PipeEntityBase extends BlockEntity implements PipeInventoryImpl, Tickable {
     public int OUTPUT_COOLDOWN_MAX = 0;
     protected int outputCooldown = 0;
 
-    DefaultedList<ItemStack> items = DefaultedList.ofSize(1, ItemStack.EMPTY);
+    protected DefaultedList<ItemStack> items = DefaultedList.ofSize(1, ItemStack.EMPTY);
 
-    public PipeEntityBase(BlockEntityType type) {
+    public PipeEntityBase(BlockEntityType<?> type) {
         super(type);
     }
 
     protected boolean attemptOutput() {
         if (world == null || world.isClient())
             return false;
-        if (getCachedState().get(PipeBase.Props.powered))
+        if (getCachedState().get(PipeProps.powered))
             return false;
         if (this.isEmpty())
             return false;
@@ -53,7 +52,7 @@ public abstract class PipeEntityBase extends BlockEntity implements PipeInventor
                 return true;
         }
 
-        Direction output = getCachedState().get(Pipe.Props.output);
+        Direction output = getCachedState().get(PipeProps.output);
 
         Inventory outputInventory = HopperBlockEntity.getInventoryAt(world, pos.offset(output));
         if (outputInventory == null)
@@ -63,12 +62,12 @@ public abstract class PipeEntityBase extends BlockEntity implements PipeInventor
     }
 
     protected PipeExtractorEntityBase getExtractor() {
-        for (Entry<Direction, BooleanProperty> extension : Pipe.Props.extensions.entrySet()) {
+        for (Entry<Direction, BooleanProperty> extension : PipeProps.extensions.entrySet()) {
             BlockState state = world.getBlockState(pos.offset(extension.getKey()));
 
-            if (state.getBlock() instanceof PipeBase) {
-                // there is a pipe connected
-                if (state.get(Pipe.Props.input).getOpposite() == extension.getKey()) {
+            if (state != null && state.getBlock() instanceof PipeExtractor) {
+                // there is an extractor pipe connected
+                if (state.get(PipeExtractorProps.input).getOpposite() == extension.getKey()) {
                     // the pipes's input is this pipe
                     BlockEntity entity = world.getBlockEntity(pos.offset(extension.getKey()));
 
@@ -114,6 +113,8 @@ public abstract class PipeEntityBase extends BlockEntity implements PipeInventor
             markDirty();
         }
     }
+    
+    public abstract boolean canExtract(int slot, ItemStack stack, Direction dir);
 
     @Override
     public int getMaxCountPerStack() {
@@ -130,14 +131,11 @@ public abstract class PipeEntityBase extends BlockEntity implements PipeInventor
         return this.isEmpty();
     }
 
-    @Override
-    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
-        return this.getCachedState().get(PipeBase.Props.output) != dir;
-    }
 
     @Override
     public void fromTag(BlockState state, CompoundTag tag) {
         super.fromTag(state, tag);
+
         Inventories.fromTag(tag, items);
         outputCooldown = tag.getInt("output_cooldown");
     }
@@ -146,6 +144,7 @@ public abstract class PipeEntityBase extends BlockEntity implements PipeInventor
     public CompoundTag toTag(CompoundTag tag) {
         Inventories.toTag(tag, items);
         tag.putInt("output_cooldown", outputCooldown);
+        
         return super.toTag(tag);
     }
 }

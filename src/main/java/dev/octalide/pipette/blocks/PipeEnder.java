@@ -1,21 +1,18 @@
 package dev.octalide.pipette.blocks;
 
-import java.util.Arrays;
-
-import dev.octalide.pipette.PItems;
 import dev.octalide.pipette.Pipette;
 import dev.octalide.pipette.api.blocks.PipeBase;
+import dev.octalide.pipette.api.blocks.properties.PipeEnderProps;
 import dev.octalide.pipette.api.blocks.properties.PipeExtractorProps;
 import dev.octalide.pipette.api.blocks.properties.PipeProps;
-import dev.octalide.pipette.blockentities.PipeEntity;
+import dev.octalide.pipette.blockentities.PipeEnderEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager.Builder;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
@@ -27,31 +24,18 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
-public class Pipe extends PipeBase {
-    public static final String NAME = "pipe";
+import java.util.Arrays;
+
+public class PipeEnder extends PipeBase {
+    public static final String NAME = "pipe_ender";
     public static final Identifier ID = new Identifier(Pipette.MOD_ID, NAME);
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
             BlockHitResult blockHitResult) {
-        ActionResult result = ActionResult.PASS;
-
-        if (player.isHolding(PItems.PIPE_WRENCH)) {
-            // cycle output
-            Direction output = state.get(PipeProps.output);
-            Direction next = getNextDirection(state, output);
-
-            state = state.with(PipeProps.output, next);
-            state = updateExtensions(state, world, pos);
-
-            world.setBlockState(pos, state);
-
-            world.playSound(null, pos, SoundEvents.BLOCK_CHAIN_STEP, SoundCategory.BLOCKS, 0.5f, 1.5f);
-            result = ActionResult.SUCCESS;
-        }
-
-        return result;
+        return ActionResult.PASS;
     }
 
     @Override
@@ -72,44 +56,38 @@ public class Pipe extends PipeBase {
         else if (other.getBlock() instanceof PipeSplitter)
             can = true;
 
-        if (state.get(PipeProps.output) == direction)
-            can = true;
-
         return can;
     }
 
     @Override
-    public BlockEntity createBlockEntity(BlockView blockView) {
-        return new PipeEntity();
-    }
-
-    @Override
     public void appendProperties(Builder<Block, BlockState> builder) {
-        PipeProps.appendProperties(builder);
+        PipeEnderProps.appendProperties(builder);
     }
 
     @Override
     public BlockState buildDefaultState() {
-        return PipeProps.buildDefaultState(this.getDefaultState());
+        return PipeEnderProps.buildDefaultState(this.getDefaultState());
     }
 
     @Override
-    public BlockState getPlacementState(ItemPlacementContext context) {
-        BlockState state = super.getPlacementState(context);
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        if (world.isClient()) return;
 
-        Direction targetDirection = context.getSide().getOpposite();
-        BlockState target = context.getWorld().getBlockState(context.getBlockPos().offset(targetDirection));
+        BlockEntity entity = world.getBlockEntity(pos);
 
-        Direction output = targetDirection.getOpposite();
-        if (target.getBlock() instanceof Pipe) {
-            if (target.get(PipeProps.output) == output) {
-                output = target.get(PipeProps.output).getOpposite();
+        if (entity instanceof PipeEnderEntity) {
+            PipeEnderEntity enderEntity = (PipeEnderEntity) entity;
+
+            if (placer instanceof PlayerEntity) {
+                PlayerEntity player = (PlayerEntity) placer;
+
+                enderEntity.setOwner(player.getGameProfile().getId());
             }
         }
+    }
 
-        state = state.with(PipeProps.output, output.getOpposite());
-        state = updateExtensions(state, context.getWorld(), context.getBlockPos());
-
-        return state;
+    @Override
+    public BlockEntity createBlockEntity(BlockView blockView) {
+        return new PipeEnderEntity();
     }
 }

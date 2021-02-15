@@ -1,5 +1,6 @@
-package dev.octalide.pipette.blockentities;
+package dev.octalide.pipette.api.blockentities;
 
+import dev.octalide.pipette.api.blocks.properties.PipeExtractorProps;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.HopperBlockEntity;
@@ -11,13 +12,11 @@ import net.minecraft.util.math.Direction;
 
 import java.util.stream.IntStream;
 
-import dev.octalide.pipette.blocks.PipeBase;
-
 public abstract class PipeExtractorEntityBase extends PipeEntityBase {
     public int INPUT_COOLDOWN_MAX = 0;
     protected int inputCooldown = 0;
 
-    public PipeExtractorEntityBase(BlockEntityType type) {
+    public PipeExtractorEntityBase(BlockEntityType<?> type) {
         super(type);
         this.OUTPUT_COOLDOWN_MAX = 0;
     }
@@ -25,9 +24,9 @@ public abstract class PipeExtractorEntityBase extends PipeEntityBase {
 	protected boolean attemptInput() {
         if (world == null || world.isClient()) return false;
         if (!this.isEmpty()) return false;
-        if (getCachedState().get(PipeBase.Props.powered)) return false;
+        if (getCachedState().get(PipeExtractorProps.powered)) return false;
 
-        Direction input = getCachedState().get(PipeBase.Props.input);
+        Direction input = getCachedState().get(PipeExtractorProps.input);
         Inventory inputInventory = HopperBlockEntity.getInventoryAt(world, pos.offset(input));
 
         if (inputInventory == null) return false;
@@ -38,7 +37,7 @@ public abstract class PipeExtractorEntityBase extends PipeEntityBase {
 
     protected boolean extract(Inventory from, Inventory to, int slot, Direction direction) {
         ItemStack stack = from.getStack(slot).copy();
-        if (stack.isEmpty() || !canExtract(from, stack, slot, direction)) return false;
+        if (stack.isEmpty() || !canExtractFrom(from, stack, slot, direction)) return false;
 
         ItemStack result = HopperBlockEntity.transfer(from, to, from.removeStack(slot, 1), null);
         if (result.isEmpty()) {
@@ -54,12 +53,17 @@ public abstract class PipeExtractorEntityBase extends PipeEntityBase {
         return inventory instanceof SidedInventory ? IntStream.of(((SidedInventory)inventory).getAvailableSlots(side)) : IntStream.range(0, inventory.size());
     }
 
-    protected static boolean canExtract(Inventory inv, ItemStack stack, int slot, Direction direction) {
+    protected static boolean canExtractFrom(Inventory inv, ItemStack stack, int slot, Direction direction) {
         return !(inv instanceof SidedInventory) || ((SidedInventory)inv).canExtract(slot, stack, direction);
     }
 
     protected static boolean isInventoryEmpty(Inventory inv, Direction direction) {
         return getAvailableSlots(inv, direction).allMatch((i) -> inv.getStack(i).isEmpty());
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        return false;
     }
 
     @Override

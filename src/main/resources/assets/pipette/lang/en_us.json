@@ -8,10 +8,12 @@
     "item.pipette.pipe_filter": "Filtered Extractor Pipe",
     "item.pipette.pipe_splitter": "Splitter Pipe",
     "item.pipette.pipe_disposal": "Disposal Pipe",
+    "item.pipette.pipe_ender": "Ender Pipe",
 
     "block.pipette.pipe": "Pipe",
     "block.pipette.pipe_extractor": "Extractor Pipe",
     "block.pipette.pipe_filter": "Filtered Extractor Pipe",
     "block.pipette.pipe_splitter": "Splitter Pipe",
-    "block.pipette.pipe_disposal": "Disposal Pipe"
+    "block.pipette.pipe_disposal": "Disposal Pipe",
+    "block.pipette.pipe_ender": "Ender Pipe"
 }
