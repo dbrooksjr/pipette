@@ -1,5 +1,9 @@
 package dev.octalide.pipette.api.blockentities;
 
+import dev.octalide.pipette.api.PipeInventoryImpl;
+import dev.octalide.pipette.api.blocks.properties.PipeExtractorProps;
+import dev.octalide.pipette.api.blocks.properties.PipeProps;
+import dev.octalide.pipette.blocks.PipeExtractor;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -12,15 +16,9 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
-
-import java.util.Map.Entry;
-
 import org.jetbrains.annotations.Nullable;
 
-import dev.octalide.pipette.api.PipeInventoryImpl;
-import dev.octalide.pipette.api.blocks.properties.PipeExtractorProps;
-import dev.octalide.pipette.api.blocks.properties.PipeProps;
-import dev.octalide.pipette.blocks.PipeExtractor;
+import java.util.Map.Entry;
 
 public abstract class PipeEntityBase extends BlockEntity implements PipeInventoryImpl, Tickable {
     public int OUTPUT_COOLDOWN_MAX = 0;
@@ -67,7 +65,7 @@ public abstract class PipeEntityBase extends BlockEntity implements PipeInventor
         for (Entry<Direction, BooleanProperty> extension : PipeProps.extensions.entrySet()) {
             BlockState state = world.getBlockState(pos.offset(extension.getKey()));
 
-            if (state.getBlock() instanceof PipeExtractor) {
+            if (state != null && state.getBlock() instanceof PipeExtractor) {
                 // there is an extractor pipe connected
                 if (state.get(PipeExtractorProps.input).getOpposite() == extension.getKey()) {
                     // the pipes's input is this pipe
@@ -115,6 +113,8 @@ public abstract class PipeEntityBase extends BlockEntity implements PipeInventor
             markDirty();
         }
     }
+    
+    public abstract boolean canExtract(int slot, ItemStack stack, Direction dir);
 
     @Override
     public int getMaxCountPerStack() {
@@ -131,14 +131,11 @@ public abstract class PipeEntityBase extends BlockEntity implements PipeInventor
         return this.isEmpty();
     }
 
-    @Override
-    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
-        return this.getCachedState().get(PipeProps.output) != dir;
-    }
 
     @Override
     public void fromTag(BlockState state, CompoundTag tag) {
         super.fromTag(state, tag);
+
         Inventories.fromTag(tag, items);
         outputCooldown = tag.getInt("output_cooldown");
     }
@@ -147,6 +144,7 @@ public abstract class PipeEntityBase extends BlockEntity implements PipeInventor
     public CompoundTag toTag(CompoundTag tag) {
         Inventories.toTag(tag, items);
         tag.putInt("output_cooldown", outputCooldown);
+        
         return super.toTag(tag);
     }
 }

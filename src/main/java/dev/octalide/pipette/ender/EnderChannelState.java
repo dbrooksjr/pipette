@@ -1,82 +1,90 @@
 package dev.octalide.pipette.ender;
 
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.PersistentState;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
+
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.PersistentState;
 
 public class EnderChannelState extends PersistentState {
-    private ServerWorld world;
-    private ArrayList<EnderPipeChannel> channels = new ArrayList<>();
+    private Map<UUID, EnderChannelManager> managers;
     
-    public EnderChannelState(ServerWorld world, String key) {
+    public EnderChannelState(String key) {
         super(key);
-        this.world = world;
+        this.managers = new HashMap<>();
     }
 
-    public ArrayList<EnderPipeChannel> getPlayerChannels(UUID owner) {
-        return channels.stream().filter(channel -> channel.getOwner() == owner).collect(Collectors.toCollection(ArrayList::new));
+    public EnderChannel getOrCreateChannel(UUID owner, String name) {
+        EnderChannel channel = getChannel(owner, name);
+        if (channel != null) return channel;
+
+        return getOrCreateChannelManager(owner).getOrCreateChannel(name);
     }
 
-    public ArrayList<EnderPipeChannel> getChannels() {
-        return channels;
+    public EnderChannel getChannel(UUID owner, String name) {
+        if (channelExists(owner, name)) return getChannelManager(owner).getChannel(name);
+
+        return null;
     }
 
-    public void addChannel(EnderPipeChannel channel) {
-        channels.add(channel);
+    public EnderChannelManager getOrCreateChannelManager(UUID owner) {
+        EnderChannelManager manager = getChannelManager(owner);
+        if (manager != null) return manager;
+
+        manager = new EnderChannelManager();
+        managers.put(owner, manager);
+
+        return manager;
+    }
+
+    public EnderChannelManager getChannelManager(UUID owner) {
+        return managers.get(owner);
+    }
+
+    public void createChannelManager(UUID owner) {
+        managers.put(owner, new EnderChannelManager());
     }
     
-    public void remove(EnderPipeChannel channel) {
-        channels.remove(channel);
+    public void removeChannelManager(UUID owner) {
+        managers.remove(owner);
     }
 
-    public EnderPipeChannel getOrCreateChannel(ServerWorld world, String name, UUID owner, @Nullable ArrayList<UUID> whitelist) {
-        ArrayList<EnderPipeChannel> channels = getPlayerChannels(owner);
-        for (EnderPipeChannel channel : channels) {
-            if (channel.getName() == name) {
-                return channel;
-            }
+    public boolean channelExists(UUID owner, String name) {
+        EnderChannelManager manager = getChannelManager(owner);
+        if (manager != null) {
+            EnderChannel channel = manager.getChannel(name);
+            return channel != null;
         }
 
-        EnderPipeChannel epc = new EnderPipeChannel(world, name, owner, whitelist);
-        addChannel(epc);
-
-        return epc;
+        return false;
     }
 
     @Override
     public void fromTag(CompoundTag tag) {
-        System.out.println("ECS fromTag");
-        ListTag list = tag.getList("channels", 10);
+        CompoundTag managersTag = tag.getCompound("managers");
 
-        channels.clear();
-        list.forEach(channelTag -> channels.add(EnderPipeChannel.fromTag(world, (CompoundTag)channelTag)));
+        managers.clear();
+        managersTag.getKeys().forEach(uuid -> {
+            EnderChannelManager manager = new EnderChannelManager();
+            manager.fromTag(managersTag.getCompound(uuid));
+
+            this.managers.put(UUID.fromString(uuid), manager);
+        });
     }
 
     @Override
     public CompoundTag toTag(CompoundTag tag) {
-        System.out.println("ECS toTag");
-        ListTag list = new ListTag();
-        for (EnderPipeChannel channel : channels) {
-            System.out.printf("adding channel: %s\n", channel.getName());
-            list.add(channel.toTag(tag));
-        }
+        CompoundTag managersTag = new CompoundTag();
+        this.managers.forEach((uuid, manager) -> managersTag.put(uuid.toString(), manager.toTag(new CompoundTag())));
 
-        System.out.println("ECS list created");
-
-        tag.put("channels", list);
-
-        System.out.println("ECS returning tag");
+        tag.put("managers", managersTag);
 
         return tag;
     }
 
-    public static EnderChannelState getState(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(() -> { return new EnderChannelState(world, "pipette_ender_channels"); }, "pipette_ender_channels");
+    @Override
+    public boolean isDirty() {
+        return true;
     }
 }

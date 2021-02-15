@@ -6,9 +6,9 @@ import dev.octalide.pipette.api.blocks.properties.PipeSplitterProps;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.Direction;
-
 
 public class PipeSplitterEntity extends PipeEntityBase {
     private Direction currentOutput = Direction.NORTH;
@@ -18,17 +18,22 @@ public class PipeSplitterEntity extends PipeEntityBase {
     }
 
     protected boolean attemptOutput() {
-        if (world == null || world.isClient()) return false;
-        if (this.isEmpty()) return false;
-        if (getCachedState().get(PipeSplitterProps.powered)) return false;
+        if (world == null || world.isClient())
+            return false;
+        if (this.isEmpty())
+            return false;
+        if (getCachedState().get(PipeSplitterProps.powered))
+            return false;
 
         Direction target = selectNextOutput();
         // no valid output directions
-        if(target == null) return false;
+        if (target == null)
+            return false;
 
         Inventory outputInventory = HopperBlockEntity.getInventoryAt(world, pos.offset(target));
 
-        if (outputInventory == null) return false;
+        if (outputInventory == null)
+            return false;
 
         currentOutput = target;
 
@@ -39,7 +44,7 @@ public class PipeSplitterEntity extends PipeEntityBase {
         Direction next = currentOutput;
 
         for (int tries = 0; tries <= 5; tries++) {
-            switch(next) {
+            switch (next) {
                 case DOWN:
                     next = Direction.UP;
                     break;
@@ -63,10 +68,12 @@ public class PipeSplitterEntity extends PipeEntityBase {
             boolean invalid = false;
 
             // skip if this direction does not have an extension
-            if (!getCachedState().get(PipeSplitterProps.extensions.get(next))) invalid = true;
+            if (!getCachedState().get(PipeSplitterProps.extensions.get(next)))
+                invalid = true;
 
             // this output is valid
-            if (!invalid) return next;
+            if (!invalid)
+                return next;
         }
 
         return null;
@@ -86,5 +93,10 @@ public class PipeSplitterEntity extends PipeEntityBase {
         super.fromTag(state, tag);
 
         currentOutput = Direction.byId(tag.getInt("current_output"));
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        return true;
     }
 }
