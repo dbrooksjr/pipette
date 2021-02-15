@@ -10,9 +10,18 @@ It's also the best pipe mod available (as the developer, that statement might be
 
 Pipette's main purpose is to allow for very achievable item transfer -- no complex crafting paths, upgrades, complicated configuration options, etc.
 
+Pipette adds a few kinds of pipes:
+
+- **Normal Pipes**: They move items!
+- **Extractor Pipes**: They extract items!
+- **Filtered Pipes**: They extract SPECIFIC items!
+- **Splitter Pipes**: Now in up to FIVE directions at once!
+- **Disposal Pipes**: For all your saplings!
+- **Ender Pipes**: Harnesses black magic and fairy dust to transfer items impossible distances (even across dimensions)!
+
 Visit the [Wiki](https://github.com/octalide/pipette/wiki) for more information, examples, and even *pictures*!
 
-## Where do I download Pipette?
+## Where can I download Pipette?
 
 - GitHub: https://github.com/octalide/pipette/releases
 - Modrinth: https://modrinth.com/mod/pipette
