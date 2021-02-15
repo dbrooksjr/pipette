@@ -14,7 +14,6 @@ import java.util.UUID;
 
 public class PipeEnderEntity extends PipeEntityBase {
     private UUID owner;
-    private String channelName;
     private EnderChannel channel;
 
     public PipeEnderEntity() {
@@ -28,18 +27,22 @@ public class PipeEnderEntity extends PipeEntityBase {
 
     @Override
     public void tick() {
-        if (world == null || world.isClient()) return;
+        if (world == null || world.isClient())
+            return;
         if (!hasChannel()) {
-            if (owner == null) return;
-            if (channelName == null) return;
-            
+            if (owner == null)
+                return;
+
             updateChannel();
         }
     }
 
-    public void setChannel(UUID owner, String name) {
+    public UUID getOwner() {
+        return owner;
+    }
+
+    public void setOwner(UUID owner) {
         this.owner = owner;
-        this.channelName = name;
 
         updateChannel();
     }
@@ -49,11 +52,14 @@ public class PipeEnderEntity extends PipeEntityBase {
     }
 
     public void updateChannel() {
-        if (world == null) return;
-        if (world.isClient()) return;
-        if (Pipette.ECS == null) return;
+        if (world == null)
+            return;
+        if (world.isClient())
+            return;
+        if (Pipette.ECS == null)
+            return;
 
-        channel = Pipette.ECS.getOrCreateChannel(owner, channelName);
+        channel = Pipette.ECS.getOrCreateChannel(owner);
     }
 
     public boolean hasChannel() {
@@ -74,15 +80,15 @@ public class PipeEnderEntity extends PipeEntityBase {
     public void fromTag(BlockState state, CompoundTag tag) {
         super.fromTag(state, tag);
 
-        if (world != null && world.isClient()) return;
+        if (world != null && world.isClient())
+            return;
 
-        setChannel(tag.getUuid("owner"), tag.getString("channel_name"));
+        setOwner(tag.getUuid("owner"));
     }
 
     @Override
     public CompoundTag toTag(CompoundTag tag) {
         tag.putUuid("owner", owner);
-        tag.putString("channel_name", channelName);
 
         return super.toTag(tag);
     }

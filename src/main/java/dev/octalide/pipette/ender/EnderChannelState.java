@@ -1,84 +1,71 @@
 package dev.octalide.pipette.ender;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.PersistentState;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.PersistentState;
-
 public class EnderChannelState extends PersistentState {
-    private Map<UUID, EnderChannelManager> managers;
+    private Map<UUID, EnderChannel> channels;
     
     public EnderChannelState(String key) {
         super(key);
-        this.managers = new HashMap<>();
+        this.channels = new HashMap<>();
     }
 
-    public EnderChannel getOrCreateChannel(UUID owner, String name) {
-        EnderChannel channel = getChannel(owner, name);
+    public ArrayList<EnderChannel> getAllChannels() {
+        return (ArrayList<EnderChannel>) channels.values();
+    }
+
+    public EnderChannel getOrCreateChannel(UUID owner) {
+        EnderChannel channel = getChannel(owner);
         if (channel != null) return channel;
 
-        return getOrCreateChannelManager(owner).getOrCreateChannel(name);
+        resetChannel(owner);
+
+        return getChannel(owner);
     }
 
-    public EnderChannel getChannel(UUID owner, String name) {
-        if (channelExists(owner, name)) return getChannelManager(owner).getChannel(name);
+    public EnderChannel getChannel(UUID owner) {
+        if (hasChannel(owner)) return channels.get(owner);
 
         return null;
     }
 
-    public EnderChannelManager getOrCreateChannelManager(UUID owner) {
-        EnderChannelManager manager = getChannelManager(owner);
-        if (manager != null) return manager;
-
-        manager = new EnderChannelManager();
-        managers.put(owner, manager);
-
-        return manager;
+    public void removeChannel(UUID owner) {
+        channels.remove(owner);
     }
 
-    public EnderChannelManager getChannelManager(UUID owner) {
-        return managers.get(owner);
+    public boolean hasChannel(UUID owner) {
+        return channels.get(owner) != null;
     }
 
-    public void createChannelManager(UUID owner) {
-        managers.put(owner, new EnderChannelManager());
-    }
-    
-    public void removeChannelManager(UUID owner) {
-        managers.remove(owner);
-    }
-
-    public boolean channelExists(UUID owner, String name) {
-        EnderChannelManager manager = getChannelManager(owner);
-        if (manager != null) {
-            EnderChannel channel = manager.getChannel(name);
-            return channel != null;
-        }
-
-        return false;
+    public void resetChannel(UUID owner) {
+        channels.put(owner, new EnderChannel(owner));
     }
 
     @Override
     public void fromTag(CompoundTag tag) {
-        CompoundTag managersTag = tag.getCompound("managers");
+        CompoundTag channelsTag = tag.getCompound("channels");
 
-        managers.clear();
-        managersTag.getKeys().forEach(uuid -> {
-            EnderChannelManager manager = new EnderChannelManager();
-            manager.fromTag(managersTag.getCompound(uuid));
+        channels.clear();
+        channelsTag.getKeys().forEach(uuid -> {
+            EnderChannel channel = new EnderChannel(UUID.fromString(uuid));
+            channel.fromTag(channelsTag.getCompound(uuid));
 
-            this.managers.put(UUID.fromString(uuid), manager);
+            this.channels.put(UUID.fromString(uuid), channel);
         });
     }
 
     @Override
     public CompoundTag toTag(CompoundTag tag) {
-        CompoundTag managersTag = new CompoundTag();
-        this.managers.forEach((uuid, manager) -> managersTag.put(uuid.toString(), manager.toTag(new CompoundTag())));
+        CompoundTag channelsTag = new CompoundTag();
+        this.channels.forEach((uuid, channel) -> channelsTag.put(uuid.toString(), channel.toTag(new CompoundTag())));
 
-        tag.put("managers", managersTag);
+        tag.put("channels", channelsTag);
 
         return tag;
     }

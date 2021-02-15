@@ -33,8 +33,9 @@ public class PipeEnder extends PipeBase {
     public static final Identifier ID = new Identifier(Pipette.MOD_ID, NAME);
 
     @Override
-    public BlockEntity createBlockEntity(BlockView blockView) {
-        return new PipeEnderEntity();
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
+            BlockHitResult blockHitResult) {
+        return ActionResult.PASS;
     }
 
     @Override
@@ -59,12 +60,6 @@ public class PipeEnder extends PipeBase {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
-            BlockHitResult blockHitResult) {
-        return ActionResult.PASS;
-    }
-
-    @Override
     public void appendProperties(Builder<Block, BlockState> builder) {
         PipeEnderProps.appendProperties(builder);
     }
@@ -86,8 +81,13 @@ public class PipeEnder extends PipeBase {
             if (placer instanceof PlayerEntity) {
                 PlayerEntity player = (PlayerEntity) placer;
 
-                enderEntity.setChannel(player.getGameProfile().getId(), "default");
+                enderEntity.setOwner(player.getGameProfile().getId());
             }
         }
+    }
+
+    @Override
+    public BlockEntity createBlockEntity(BlockView blockView) {
+        return new PipeEnderEntity();
     }
 }

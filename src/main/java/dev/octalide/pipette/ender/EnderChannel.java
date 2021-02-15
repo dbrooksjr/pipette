@@ -1,22 +1,23 @@
 package dev.octalide.pipette.ender;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
 import dev.octalide.pipette.api.PipeInventoryImpl;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.NbtHelper;
 import net.minecraft.util.collection.DefaultedList;
 
+import java.util.UUID;
+
 public class EnderChannel implements PipeInventoryImpl {
-    private ArrayList<UUID> whitelist;
+    private UUID owner;
     private DefaultedList<ItemStack> items = DefaultedList.ofSize(1, ItemStack.EMPTY);
 
-    public EnderChannel() {
-        this.whitelist = new ArrayList<UUID>();
+    public EnderChannel(UUID owner) {
+        this.owner = owner;
+    }
+
+    public UUID getOwner() {
+        return owner;
     }
 
     @Override
@@ -24,38 +25,15 @@ public class EnderChannel implements PipeInventoryImpl {
         return items;
     }
 
-    public ArrayList<UUID> getWhitelist() {
-        return whitelist;
-    }
-
-    public void addPlayerToWhitelist(UUID player) {
-        whitelist.add(player);
-    }
-
-    public void removePlayerFromWhitelist(UUID player) {
-        whitelist.remove(player);
-    }
-
-    public boolean canPlayerUse(UUID player) {
-        return whitelist.contains(player);
-    }
-
     public CompoundTag toTag(CompoundTag tag) {
-        ListTag list = new ListTag();
-        for (UUID player : whitelist) {
-            list.add(NbtHelper.fromUuid(player));
-        }
-
-        tag.put("whitelist", list);
+        tag.putUuid("owner", owner);
         Inventories.toTag(tag, items);
 
         return tag;
     }
 
     public EnderChannel fromTag(CompoundTag tag) {
-        // 11 is the type for IntArrayTag (UUID)
-        tag.getList("whitelist", 11).forEach(uuidTag -> whitelist.add(NbtHelper.toUuid(uuidTag)));
-
+        owner = tag.getUuid("owner");
         Inventories.fromTag(tag, items);
 
         return this;
